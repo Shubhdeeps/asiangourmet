@@ -5,12 +5,12 @@ import "firebase/auth";
 import "firebase/firestore/bundle";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA4ebgYau9xOYBSua3bvKBRYAnOxLggP_8",
-  authDomain: "asiangourmettallinn.firebaseapp.com",
-  projectId: "asiangourmettallinn",
-  storageBucket: "asiangourmettallinn.appspot.com",
-  messagingSenderId: "384355767972",
-  appId: "1:384355767972:web:ec52394edb61a9c8593831",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
