@@ -1,0 +1,112 @@
+body {
+  background: #fafcfe;
+  margin: 0%;
+  padding: 0%;
+  overflow-x: hidden;
+}
+
+.body-container {
+  height: 200vh;
+}
+.card-bg {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 1px 2px 40px -19px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
+  border-radius: 20px;
+}
+
+.border-r {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.text-highlighted {
+  color: #30c4d9;
+}
+
+.top-category-card {
+  box-shadow: none;
+  transition: box-shadow 0.5s ease-in;
+  transition: scale 0.1s ease-in;
+}
+
+.top-category-card:hover {
+  box-shadow: 0px 4px 20px rgba(48, 196, 217, 0.3);
+  scale: 1.1;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.product-card {
+  box-shadow: none;
+  border-radius: 10px;
+}
+
+.overlay-1 {
+  background: #1b1b1b;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  opacity: 1;
+  z-index: 99;
+}
+
+.overlay {
+  background: #1b1b1b;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: -100vh;
+  z-index: 99;
+  animation: up 1.5s ease 1;
+}
+
+@keyframes up {
+  from {
+    top: 0px;
+  }
+  to {
+    top: -100vh;
+  }
+}
+
+/* Mansonry grid */
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 30px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div {
+  margin-bottom: 30px;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+::-webkit-scrollbar {
+  height: 5px;
+  width: 7px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: green;
+  -webkit-border-radius: 1ex;
+}
