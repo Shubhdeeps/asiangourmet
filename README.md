@@ -76,40 +76,41 @@ npm test
 ├── README.md
 ├── package.json
 ├── public
-│ ├── index.html
-│ └── favicon.ico
+│   ├── index.html
+│   └── favicon.ico
 └── src
-├── App.tsx
-├── main.tsx
-├── components
-│ ├── dashboard
-│ |── header
-│ |── loader
-│ |── products
-│ |── singleProduct
-│ └── wrapper
-├── pages
-│ ├── cart
-│ ├── dashboard
-│ ├── products
-│ ├── ProtectedRoutes.tsx
-│ └── routes.tsx
-├── firebase
-│ └── firebaseConfig.ts
-├── assets
-│ ├── images
-│ │ ├── logo.png
-│ │ └── background.jpg
-│ |── animationData
-│ |── styles
-│ |── svg
-|── layout
-| └── layout.tsx
-└── services
-|── cartServices.ts
-|── db.model.ts
-|── indexedDB.ts
-└── productServices.ts
+    ├── App.tsx
+    ├── main.tsx
+    ├── components
+    │   ├── dashboard
+    │   |── header
+    │   |── loader
+    │   |── products
+    │   |── singleProduct
+    │   └── wrapper
+    ├── pages
+    │   ├── cart
+    │   ├── dashboard
+    │   ├── products
+    │   ├── ProtectedRoutes.tsx
+    │   └── routes.tsx
+    ├── firebase
+    │   └── firebaseConfig.ts
+    ├── assets
+    │   ├── images
+    │   │   ├── logo.png
+    │   │   └── background.jpg
+    │   |── animationData
+    │   |── styles
+    │   |── svg
+    |── layout
+    |   └── layout.tsx
+    └── services
+        |── cartServices.ts
+        |── db.model.ts
+        |── indexedDB.ts
+        └── productServices.ts
+
 
 ## Contributing
 
