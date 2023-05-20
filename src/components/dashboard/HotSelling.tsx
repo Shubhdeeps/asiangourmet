@@ -7,10 +7,10 @@ import dragonfruit from "../../assets/images/topselling/dragonfruit.png";
 import mango from "../../assets/images/topselling/mango.png";
 import okra from "../../assets/images/topselling/okra.png";
 import pipinomelon from "../../assets/images/topselling/pipinomelon.png";
-import { Product } from "../../services/db.model";
+import { Product } from "../../models/Product.model";
 const foodProducts: Product[] = [
   {
-    id: 1,
+    id: "1",
     name: "Dragon Fruit",
     imageURL: dragonfruit,
     price: 6.99,
@@ -19,7 +19,7 @@ const foodProducts: Product[] = [
     quantityType: "kg",
   },
   {
-    id: 2,
+    id: "2",
     name: "Mangoes",
     imageURL: mango,
     price: 5.25,
@@ -28,7 +28,7 @@ const foodProducts: Product[] = [
     quantityType: "g",
   },
   {
-    id: 3,
+    id: "3",
     name: "Okra",
     imageURL: okra,
     price: 12.75,
@@ -37,7 +37,7 @@ const foodProducts: Product[] = [
     quantityType: "kg",
   },
   {
-    id: 4,
+    id: "4",
     name: "Pipino Melon",
     imageURL: pipinomelon,
     price: 3.5,

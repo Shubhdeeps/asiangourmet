@@ -73,6 +73,7 @@ npm test
 
 ## Project Structure
 
+```
 ├── README.md
 ├── package.json
 ├── public
@@ -110,7 +111,7 @@ npm test
         |── db.model.ts
         |── indexedDB.ts
         └── productServices.ts
-
+```
 
 ## Contributing
 

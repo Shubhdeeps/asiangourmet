@@ -1,3 +1,6 @@
+import { CartProduct } from "../models/CartProduct.model";
+import { cartProducts } from "../store";
+
 const indexDB =
   window.indexedDB ||
   (window as any).mozIndexedDB ||
@@ -8,7 +11,7 @@ const indexDB =
 const dbName = "cartDB";
 const storeName = "cartItems";
 
-function initCartItems() {
+export function initCartItems() {
   const request = indexDB.open(dbName, 1);
 
   request.onerror = (event) => {
@@ -17,22 +20,51 @@ function initCartItems() {
 
   request.onupgradeneeded = () => {
     const db = request.result;
-    const store = db.createObjectStore(storeName, { keyPath: "id" });
+    db.createObjectStore(storeName, { keyPath: "id" });
+  };
+}
 
-    //to make data searchale we need to create index for it
-    store.createIndex("p_category", ["category"], { unique: false });
-    store.createIndex("p_price", ["price"], { unique: false });
-    store.createIndex("p_name", ["name"], { unique: false });
-    store.createIndex("p_category_name", ["category", "name"], {
-      unique: false,
-    });
+export function removeItemFromCart(itemId: string) {
+  const request = indexDB.open(dbName, 1);
+  request.onerror = function () {
+    console.error("Error opening IndexedDB database");
   };
 
   request.onsuccess = () => {
     const db = request.result;
     const transaction = db.transaction(storeName, "readwrite");
-
     const store = transaction.objectStore(storeName);
-    //save all the items to the database
+
+    store.delete(itemId);
+  };
+}
+
+export function addItemsToCart(item: CartProduct) {
+  const request = indexDB.open(dbName, 1);
+  request.onerror = function () {
+    console.error("Error opening IndexedDB database");
+  };
+
+  request.onsuccess = () => {
+    const db = request.result;
+    const transaction = db.transaction(storeName, "readwrite");
+    const store = transaction.objectStore(storeName);
+    store.put(item);
+  };
+}
+
+// only run it in the start
+export function getCartItems() {
+  const request = indexDB.open(dbName, 1);
+  request.onsuccess = () => {
+    const db = request.result;
+    const transaction = db.transaction(storeName, "readonly");
+    const store = transaction.objectStore(storeName);
+
+    const queryRes = store.getAll();
+    queryRes.onsuccess = () => {
+      const res = queryRes.result as CartProduct[];
+      cartProducts.value = res;
+    };
   };
 }

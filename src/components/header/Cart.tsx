@@ -3,8 +3,8 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useNavigate } from "react-router-dom";
-
+import { useState, useEffect } from "react";
+import { cartProducts } from "../../store";
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
     right: -3,
@@ -15,12 +15,19 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   },
 }));
 
-export default function Cart() {
-  const navigate = useNavigate();
+export default function Cart({ setOpen }: { setOpen: () => void }) {
+  const cartCount = cartProducts.value.length;
+  const [cartItemsCount, setCartItemCount] = useState(cartCount);
+
+  useEffect(() => {
+    setCartItemCount(cartCount);
+    console.log(cartCount);
+  }, [cartCount]);
+
   return (
     <Tooltip title="Cart">
-      <IconButton aria-label="cart" onClick={() => navigate("/cart")}>
-        <StyledBadge badgeContent={4} color="warning">
+      <IconButton aria-label="cart" onClick={setOpen}>
+        <StyledBadge badgeContent={cartItemsCount} color="warning">
           <ShoppingCartIcon fontSize="large" />
         </StyledBadge>
       </IconButton>

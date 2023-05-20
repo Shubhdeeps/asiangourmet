@@ -4,20 +4,23 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./pages/routes";
 import { initDBwithData } from "./services/indexedDB";
 import data from "./assets/data.json";
+import { SnackbarProvider } from "notistack";
+import { getCartItems } from "./services/cartServices";
 
 function App() {
   console.log("render app");
   initDBwithData(data);
 
   useEffect(() => {
-    console.log("init data");
-    return () => {
-      console.log("Unmount");
-    };
+    getCartItems();
+    // searchProductBasedOnProductInitials("Pepino");
   }, []);
+
   return (
     <>
-      <RouterProvider router={router} />
+      <SnackbarProvider maxSnack={6}>
+        <RouterProvider router={router} />
+      </SnackbarProvider>
     </>
   );
 }

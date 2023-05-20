@@ -1,4 +1,4 @@
-import { Product } from "./db.model";
+import { Product } from "../models/Product.model";
 import { indexDB, productStoreName } from "./indexedDB";
 
 const dbName = "productsDB";
@@ -47,27 +47,34 @@ export const getDataBasedOnCategoryAndProductName = (
 };
 
 export const searchProductBasedOnProductInitials = (keyword: string) => {
-  console.log("searciginh.");
-
   const request = indexDB.open(dbName, 1);
+  request.onerror = (event: any) => {
+    console.error("Error opening database:", event.target.error);
+  };
   request.onsuccess = () => {
     const db = request.result;
-    const transaction = db.transaction(productStoreName, "readwrite");
+    const transaction = db.transaction([productStoreName], "readonly");
+    transaction.onerror = (event: any) => {
+      console.error("Transaction error:", event.target.error);
+    };
     const store = transaction.objectStore(productStoreName);
 
     const categoryIndex = store.index("p_name");
-    const range = IDBKeyRange.bound("\uffff" + keyword, keyword + "\uffff");
-    const queryRes = categoryIndex.openCursor(range);
+    // console.log("Keyword:", keyword);
+    // const range = IDBKeyRange.bound(keyword, keyword + "\uffff", true, true);
+
+    const queryRes = categoryIndex.openCursor();
+    queryRes.onerror = (event: any) => {
+      console.error("Query error:", event.target.error);
+    };
     queryRes.onsuccess = (e: any) => {
       const cursor = e.target.result;
-      //   // console.log(e);
-      //   // e.target.onsuccess((y: any) => {
-      //   //   console.log("y", y);
-      //   // });
 
-      if (cursor) {
-        console.log("cursor is:: ", JSON.stringify(cursor.value));
-
+      if (
+        cursor &&
+        cursor.value.name.toLowerCase().includes(keyword.toLowerCase())
+      ) {
+        console.log(cursor.value);
         cursor.continue();
       }
     };

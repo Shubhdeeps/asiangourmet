@@ -1,0 +1,17 @@
+export type Categories =
+  | "hot"
+  | "mushrooms"
+  | "vegetables"
+  | "greens"
+  | "fruits"
+  | "boiled food"
+  | "drinks and snacks"
+  | "tofu"
+  | "peas & beans"
+  | "roots & yams"
+  | "leaves, herbs & spices"
+  | "mangoes"
+  | "eggplant"
+  | "chillies"
+  | "nuts and seeds"
+  | "papaya";

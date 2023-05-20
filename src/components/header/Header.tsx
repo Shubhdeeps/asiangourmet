@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,12 +12,16 @@ import CustomDrawer from "./Drawer";
 import { HideOnScroll } from "./HideHeader";
 import HeaderTabs from "./HeaderTabs";
 import Cart from "./Cart";
+import CartDrawer from "../cart/CartDrawer";
 const pages = ["Home", "Products", "About us", "Contact"];
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [showCart, setShowCart] = useState(false);
+
+  const details = navigator.userAgent;
+  const regexp = /android|iphone|kindle|ipad/i;
+  const isMobileDevice = regexp.test(details);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -26,9 +30,15 @@ function Header() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  const innerWidth = window.innerWidth;
 
   return (
     <>
+      <CartDrawer
+        innerWidth={innerWidth}
+        open={showCart}
+        setOpen={setShowCart}
+      />
       <HideOnScroll>
         <AppBar
           sx={{
@@ -97,10 +107,10 @@ function Header() {
 
               <HeaderTabs />
 
-              <Cart />
               <Tooltip title="Profile">
                 <Avatar>H</Avatar>
               </Tooltip>
+              {!isMobileDevice && <Cart setOpen={() => setShowCart(true)} />}
             </Toolbar>
           </Container>
         </AppBar>

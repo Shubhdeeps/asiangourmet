@@ -1,5 +1,12 @@
 {
   "projects": {
     "default": "asiangourmettallinn"
+  },
+  "target": {
+    "asiangourmettallinn": {
+      "hosting": {
+        "public": "asiangourmettallinn"
+      }
+    }
   }
 }

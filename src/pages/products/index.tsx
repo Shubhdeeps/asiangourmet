@@ -9,8 +9,8 @@ import {
   getDataBasedOnFilters,
   searchProductBasedOnProductInitials,
 } from "../../services/productServices";
-import { Product } from "../../services/db.model";
 import ProductPopup from "../../components/singleProduct";
+import { Product } from "../../models/Product.model";
 
 export default function Products() {
   const { category } = useParams();
@@ -20,7 +20,7 @@ export default function Products() {
   useEffect(() => {
     if (category) {
       console.log(category);
-      searchProductBasedOnProductInitials("jack");
+      searchProductBasedOnProductInitials("JACK");
       getDataBasedOnFilters(category, setProducts);
 
       //set previous scroll if avaible else set zero
@@ -46,35 +46,41 @@ export default function Products() {
   }
 
   return (
-    <Container maxWidth="xl">
-      {singleProduct && (
-        <ProductPopup
-          open={!!singleProduct}
-          product={singleProduct}
-          onClose={handleClose}
-        />
-      )}
-      <Box sx={{ mt: "100px", mb: "40px" }}>
-        <BreadCrumbs />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "20px",
-          justifyContent: "center",
-          width: "100%",
-        }}
-      >
-        {products.map((product) => {
-          return (
-            <Fragment key={product.id}>
-              <ProductCard setProduct={setSingleProduct} props={product} />
-            </Fragment>
-          );
-        })}
-      </Box>
+    <>
+      <Container maxWidth="xl">
+        {singleProduct && (
+          <ProductPopup
+            open={!!singleProduct}
+            product={singleProduct}
+            onClose={handleClose}
+          />
+        )}
+        <Box sx={{ my: "50px" }}>
+          <BreadCrumbs />
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            mb: {
+              md: "30px",
+              xs: "120px",
+            },
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, 270px)",
+            gridGap: "1rem",
+            justifyContent: "center",
+          }}
+        >
+          {products.map((product) => {
+            return (
+              <Fragment key={product.id}>
+                <ProductCard props={product} />
+              </Fragment>
+            );
+          })}
+        </Box>
+      </Container>
       <FloatingTabs />
-    </Container>
+    </>
   );
 }

@@ -9,9 +9,8 @@ import {
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Product } from "../../services/db.model";
 import noimage from "../../assets/images/noimage.jpg";
-import grey from "@mui/material/colors/grey";
+import { Product } from "../../models/Product.model";
 
 const useStyles = makeStyles((theme) => ({
   dialog: {

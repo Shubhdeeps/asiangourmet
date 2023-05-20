@@ -1,4 +1,5 @@
-import { Data, Product, categories } from "./db.model";
+import { initCartItems } from "./cartServices";
+import { Data, categories } from "./db.model";
 
 export const indexDB =
   window.indexedDB ||
@@ -43,4 +44,7 @@ export function initDBwithData(data: Data) {
       }
     }
   };
+
+  //initiate cart db
+  initCartItems();
 }
