@@ -11,14 +11,19 @@ export default function WaveContainer({
     <Box
       sx={{
         position: "relative",
-        height: { md: "1800px", sm: "2400px", xs: "2400px" },
+        height: { md: "1650px", sm: "1400px", xs: "1350px" },
+        mb: {
+          sm: "0px",
+          xs: "-400px",
+        },
       }}
     >
       <Box
         sx={{
           position: "relative",
+
           display: "flex",
-          height: { md: "1800px", sm: "2400px", xs: "2400px" },
+          height: { md: "1650px", sm: "1400px", xs: "950px" },
           flexDirection: "column",
           justifyContent: "space-between",
           background: "#f4f4f4",
@@ -33,16 +38,18 @@ export default function WaveContainer({
           {waveDown}
         </Box>
       </Box>
-      <Container maxWidth="xl">
+      <Container>
         <Box
           display="flex"
           flexDirection="column"
           alignItems="center"
           sx={{
             zIndex: 2,
+            width: "100%",
             position: "absolute",
+            left: "0px",
             top: {
-              md: "30%",
+              md: "25%",
               sm: "15%",
               xs: "15%",
             },

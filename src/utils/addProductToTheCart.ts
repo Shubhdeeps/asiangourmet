@@ -9,7 +9,9 @@ export function addProductToCart(product: Product, action: "ADD" | "REMOVE") {
   const _cartProducts = cartProducts.value;
   // isolate the current Item
   const _previousCartItem = _cartProducts.find((item) => item.id === id);
-
+  const _indexOfPreviousCartItem = _cartProducts.findIndex(
+    (item) => item.id === id
+  );
   // remove the item from the array
   const newCartProductArray = _cartProducts.filter((item) => item.id !== id);
   if (action === "ADD") {
@@ -19,7 +21,8 @@ export function addProductToCart(product: Product, action: "ADD" | "REMOVE") {
         count: _previousCartItem.count + 1,
       };
       updatedProduct = newItem;
-      cartProducts.value = [...newCartProductArray, newItem];
+      newCartProductArray.splice(_indexOfPreviousCartItem, 0, newItem);
+      cartProducts.value = newCartProductArray;
     } else {
       const newItem: CartProduct = {
         ...product,
@@ -27,7 +30,8 @@ export function addProductToCart(product: Product, action: "ADD" | "REMOVE") {
       };
       updatedProduct = newItem;
 
-      cartProducts.value = [...newCartProductArray, newItem];
+      newCartProductArray.splice(_indexOfPreviousCartItem, 0, newItem);
+      cartProducts.value = newCartProductArray;
     }
   } else {
     if (_previousCartItem) {
@@ -40,7 +44,8 @@ export function addProductToCart(product: Product, action: "ADD" | "REMOVE") {
         };
         updatedProduct = newItem;
 
-        cartProducts.value = [...newCartProductArray, newItem];
+        newCartProductArray.splice(_indexOfPreviousCartItem, 0, newItem);
+        cartProducts.value = newCartProductArray;
       } else {
         cartProducts.value = newCartProductArray;
       }

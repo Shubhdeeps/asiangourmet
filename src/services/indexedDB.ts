@@ -1,5 +1,5 @@
 import { initCartItems } from "./cartServices";
-import { Data, categories } from "./db.model";
+import { Data } from "./db.model";
 
 export const indexDB =
   window.indexedDB ||
@@ -11,7 +11,7 @@ export const indexDB =
 const dbName = "productsDB";
 export const productStoreName = "products";
 
-export function initDBwithData(data: Data) {
+export function initDB() {
   const request = indexDB.open(dbName, 1);
 
   request.onerror = (event) => {
@@ -30,21 +30,24 @@ export function initDBwithData(data: Data) {
       unique: false,
     });
   };
+  //initiate cart db
+  initCartItems();
+}
+
+export function initDBwithData(data: Data) {
+  const request = indexDB.open(dbName, 1);
+
+  request.onerror = (event) => {
+    console.log(event);
+  };
 
   request.onsuccess = () => {
     const db = request.result;
     const transaction = db.transaction(productStoreName, "readwrite");
-
     const store = transaction.objectStore(productStoreName);
     //save all the items to the database
-    for (const category of categories) {
-      const categoryItemArray = data[category];
-      for (const item of categoryItemArray) {
-        store.put(item);
-      }
+    for (const item of Object.values(data)) {
+      store.put(item);
     }
   };
-
-  //initiate cart db
-  initCartItems();
 }

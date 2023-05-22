@@ -1,22 +1,22 @@
 import Box from "@mui/material/Box";
-import { Chip, Divider } from "@mui/material";
+import Chip from "@mui/material/Chip";
 import noimage from "../../assets/images/noimage.jpg";
 import AddToCartButton from "./components/AddToCartButton";
 import QuantityAndPrice from "./components/QuantityAndPrice";
 import { Product } from "../../models/Product.model";
 import { cartProducts } from "../../store";
-
-function ProductCard({
-  props,
-}: {
-  props: Product;
-  // setProduct: React.Dispatch<React.SetStateAction<Product | null>>;
-}) {
+import { useEffect, useState } from "react";
+function ProductCard({ props }: { props: Product }) {
   const { name, imageURL, price, quantity, quantityType, id } = props;
   const currProduct = cartProducts.value.find((item) => item.id === id);
-  const currProductCount = currProduct ? currProduct.count : 0;
+
+  const [itemCount, setItemCount] = useState(
+    currProduct ? currProduct.count : 0
+  );
+  useEffect(() => {
+    setItemCount(currProduct ? currProduct.count : 0);
+  }, [currProduct]);
   return (
-    // <MotionWrapper onClick={handleClick}>
     <Box
       display="flex"
       className="glass"
@@ -26,10 +26,10 @@ function ProductCard({
       border="1px solid #DFDFDF"
       borderRadius="10px"
       sx={{
-        height: "280px",
+        height: "380px",
         width: {
           sm: "260px",
-          xs: "275px",
+          xs: "96%",
         },
       }}
     >
@@ -40,28 +40,22 @@ function ProductCard({
           src={imageURL ? imageURL : noimage}
           className="border-r"
         />
-
-        <Divider
-          textAlign="left"
+        <Chip
+          label={name}
+          variant="filled"
+          color="default"
           sx={{
-            marginTop: "-20.02px",
+            background: "rgba(215, 215, 215, 0.5)",
+            backdropFilter: "blur(10px)",
+            fontSize: "16px",
+            fontWeight: 600,
+            px: 0.5,
+            py: 2,
+            mt: "-40px",
+            ml: 1,
+            color: "black",
           }}
-        >
-          <Chip
-            label={name}
-            variant="filled"
-            color="default"
-            sx={{
-              background: "rgba(215, 215, 215, 0.5)",
-              backdropFilter: "blur(10px)",
-              fontSize: "16px",
-              fontWeight: 600,
-              px: 0.5,
-              py: 2,
-              color: "black",
-            }}
-          />
-        </Divider>
+        />
       </Box>
       <Box
         sx={{
@@ -80,7 +74,7 @@ function ProductCard({
             alignItems: "center",
           }}
         >
-          <AddToCartButton product={props} initCount={currProductCount} />
+          <AddToCartButton product={props} initCount={itemCount} />
         </Box>
         <QuantityAndPrice
           price={price}

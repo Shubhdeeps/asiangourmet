@@ -68,7 +68,10 @@ export default function FloatingTabs() {
     <Box
       sx={{
         width: "100%",
-        height: "90px",
+        height: {
+          md: "90px",
+          xs: "70px",
+        },
         position: {
           md: "sticky",
           xs: "fixed",
@@ -84,7 +87,6 @@ export default function FloatingTabs() {
     >
       <Box
         sx={{
-          //   width: "fit-content",
           width: {
             md: "800px",
             xs: "100%",
@@ -93,7 +95,7 @@ export default function FloatingTabs() {
           background: "#363636",
           borderRadius: {
             md: "15px",
-            xs: "0px",
+            xs: "30% 30% 0px 0px",
           },
           display: "flex",
           alignItems: "center",
@@ -110,15 +112,19 @@ export default function FloatingTabs() {
         >
           {bgFlower}
         </Box>
-        {/* <Box
+        <Box
           sx={{
             position: "absolute",
             right: "-38px",
             transform: "rotate(180deg)",
+            display: {
+              sm: "flex",
+              xs: "none",
+            },
           }}
         >
           {bgFlower}
-        </Box> */}
+        </Box>
         <StyledTabs
           value={value}
           onChange={handleChange}

@@ -23,7 +23,7 @@ export default function DashWrapperUp({
     <motion.section
       initial="offscreen"
       whileInView="onscreen"
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: 0.2 }}
       variants={cardVariants}
     >
       {children}

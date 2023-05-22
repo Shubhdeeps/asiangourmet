@@ -1,13 +1,11 @@
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useEffect, useState } from "react";
-import { useSnackbar } from "notistack";
-import { CounterButtons } from "./CounterButton";
 import { Product } from "../../../models/Product.model";
 import { addProductToCart } from "../../../utils/addProductToTheCart";
+import { MobileCounterButtons } from "./MobileCounterButton";
 
-export default function AddToCartButton({
+export default function MobileAddToCartButton({
   product,
   initCount,
 }: {
@@ -20,22 +18,6 @@ export default function AddToCartButton({
     setCounter(initCount);
   }, [initCount]);
 
-  const { innerWidth } = window;
-  const { enqueueSnackbar } = useSnackbar();
-
-  const handleClickVariant = () => {
-    if (innerWidth < 800) {
-      return;
-    }
-    // variant could be success, error, warning, info, or default
-    const text = (
-      <Typography>{`${product.name} added to your cart.`}</Typography>
-    );
-    enqueueSnackbar(text, {
-      variant: "success",
-    });
-  };
-
   const handleAddtoCart = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     action: "ADD" | "REMOVE"
@@ -45,7 +27,6 @@ export default function AddToCartButton({
     addProductToCart(product, action);
     if (action === "ADD") {
       setCounter((prevState) => prevState + 1);
-      handleClickVariant();
     } else {
       setCounter((prevState) => prevState - 1);
     }
@@ -55,14 +36,15 @@ export default function AddToCartButton({
     <>
       {counter === 0 ? (
         <IconButton onClick={(e) => handleAddtoCart(e, "ADD")}>
-          <AddShoppingCartIcon color="success" fontSize="medium" />
+          <AddShoppingCartIcon
+            sx={{
+              color: "#FAFCFE",
+            }}
+            fontSize="small"
+          />
         </IconButton>
       ) : (
-        <CounterButtons
-          handleAddtoCart={handleAddtoCart}
-          count={counter}
-          variant="row"
-        />
+        <MobileCounterButtons handleAddtoCart={handleAddtoCart} />
       )}
     </>
   );

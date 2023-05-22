@@ -18,6 +18,9 @@ body {
   border-radius: 20px;
 }
 
+.border-5 {
+  border-radius: 5px;
+}
 .border-r {
   border-radius: 10px 10px 0px 0px;
 }

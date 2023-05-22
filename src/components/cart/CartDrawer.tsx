@@ -9,6 +9,8 @@ import { cartProducts } from "../../store";
 import { blurrySvg } from "./blurSvg";
 import { Divider } from "@material-ui/core";
 import CartItem from "./CartItem";
+import Typography from "@mui/material/Typography";
+import CartTotal from "./CartTotal";
 
 const drawerBleeding = 56;
 
@@ -29,12 +31,13 @@ const Root = styled("div")(() => ({
 
 export default function SwipeableEdgeDrawer(props: Props) {
   const { window, innerWidth, open, setOpen } = props;
-  const cartCount = Object.keys(cartProducts.value).length;
+  const cartCount = cartProducts.value.length;
   const [cartItemsCount, setCartItemCount] = React.useState(cartCount);
 
   useEffect(() => {
     setCartItemCount(cartCount);
   }, [cartCount]);
+
   let windowWidth = 40;
 
   if (innerWidth < 1200) {
@@ -75,7 +78,7 @@ export default function SwipeableEdgeDrawer(props: Props) {
         open={open}
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
-        swipeAreaWidth={drawerBleeding}
+        swipeAreaWidth={isMobileDevice ? drawerBleeding : 1}
         disableSwipeToOpen={false}
         ModalProps={{
           keepMounted: true,
@@ -131,10 +134,12 @@ export default function SwipeableEdgeDrawer(props: Props) {
             flexDirection: "column",
             gap: 2,
             alignItems: "stretch",
-            mt: 3,
+            mt: 0,
             overflowY: "auto",
+            position: "relative",
           }}
         >
+          <CartTotal />
           {cartProducts.value.map((product) => {
             return (
               <React.Fragment key={product.id}>
@@ -143,6 +148,9 @@ export default function SwipeableEdgeDrawer(props: Props) {
               </React.Fragment>
             );
           })}
+          {!cartItemsCount && (
+            <Typography sx={{ textAlign: "center" }}>Empty cart</Typography>
+          )}
         </Box>
       </SwipeableDrawer>
     </Root>

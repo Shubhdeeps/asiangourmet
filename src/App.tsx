@@ -2,18 +2,19 @@ import { useEffect } from "react";
 import "./assets/styles/utils.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./pages/routes";
-import { initDBwithData } from "./services/indexedDB";
-import data from "./assets/data.json";
+import { initDB } from "./services/indexedDB";
 import { SnackbarProvider } from "notistack";
 import { getCartItems } from "./services/cartServices";
+import { getProductsAndUpdateToDb } from "./firebase/functions/getProductsAndUpdateToDB";
 
 function App() {
-  console.log("render app");
-  initDBwithData(data);
-
+  //init store
+  initDB();
   useEffect(() => {
+    (async () => {
+      await getProductsAndUpdateToDb();
+    })();
     getCartItems();
-    // searchProductBasedOnProductInitials("Pepino");
   }, []);
 
   return (

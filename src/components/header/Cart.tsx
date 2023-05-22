@@ -21,7 +21,6 @@ export default function Cart({ setOpen }: { setOpen: () => void }) {
 
   useEffect(() => {
     setCartItemCount(cartCount);
-    console.log(cartCount);
   }, [cartCount]);
 
   return (

@@ -1,18 +1,24 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CounterButtons } from "../products/components/CounterButton";
 import { CartProduct } from "../../models/CartProduct.model";
+import { addProductToCart } from "../../utils/addProductToTheCart";
 
 export default function CartItem({ product }: { product: CartProduct }) {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(product.count);
 
+  useEffect(() => {
+    setCounter(product.count);
+  }, [product.count]);
   const handleAddtoCart = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     action: "ADD" | "REMOVE"
   ) => {
     //prevent click to parent element
     e.stopPropagation();
+    addProductToCart(product, action);
+
     if (action === "ADD") {
       setCounter((prevState) => prevState + 1);
     } else {
@@ -49,7 +55,8 @@ export default function CartItem({ product }: { product: CartProduct }) {
             borderRadius: "10px 0px 0px 10px",
             height: "100%",
             width: {
-              md: "80px",
+              md: "130px",
+              sm: "100px",
               xs: "70px",
             },
           }}
@@ -115,10 +122,6 @@ export default function CartItem({ product }: { product: CartProduct }) {
         sx={{
           background: "#F5F5F5",
           borderRadius: "10px",
-          display: {
-            xs: "none",
-            sm: "flex",
-          },
         }}
       >
         <CounterButtons

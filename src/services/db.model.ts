@@ -20,5 +20,5 @@ export const categories = [
 ];
 
 export type Data = {
-  [key: string]: Product[];
+  [key: string]: Product;
 };

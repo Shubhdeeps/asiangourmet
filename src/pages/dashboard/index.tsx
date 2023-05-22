@@ -28,8 +28,8 @@ export default function Dashboard() {
       <Box
         sx={{
           height: "100%",
-          pb: "300px",
-          pt: "300px",
+          pb: { md: "300px", xs: "100px" },
+          pt: { md: "300px", xs: "100px" },
         }}
       >
         <DashWrapperUp>
@@ -39,9 +39,9 @@ export default function Dashboard() {
       <HotSelling />
       <Box
         sx={{
-          height: "100%",
-          pb: "200px",
-          pt: "200px",
+          // height: "100%",
+          pb: { md: "200px", xs: "0px" },
+          pt: { md: "200px", xs: "0px" },
         }}
       >
         <DashWrapperUp>
@@ -53,8 +53,8 @@ export default function Dashboard() {
       <Box
         sx={{
           // height: "100%",
-          pt: "200px",
-          pb: "200px",
+          pb: { md: "200px", xs: "0px" },
+          pt: { md: "200px", xs: "0px" },
         }}
       >
         <DashWrapperUp>
@@ -75,6 +75,7 @@ export default function Dashboard() {
       <Box
         sx={{
           background: "#f4f4f4",
+          mt: { xs: "-140px", sm: "0px" },
         }}
       >
         <DashWrapperUp>

@@ -13,7 +13,6 @@ import { HideOnScroll } from "./HideHeader";
 import HeaderTabs from "./HeaderTabs";
 import Cart from "./Cart";
 import CartDrawer from "../cart/CartDrawer";
-const pages = ["Home", "Products", "About us", "Contact"];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -75,12 +74,10 @@ function Header() {
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleOpenNavMenu}
-                  color="secondary"
                 >
                   <MenuIcon />
                 </IconButton>
                 <CustomDrawer
-                  pages={pages}
                   mobileOpen={Boolean(anchorElNav)}
                   handleDrawerToggle={handleCloseNavMenu}
                 />
@@ -94,11 +91,9 @@ function Header() {
                   mr: 2,
                   display: { xs: "flex", md: "none" },
                   flexGrow: 1,
-                  fontFamily: "Joti One",
                   fontSize: "20px",
                   fontWeight: 700,
                   letterSpacing: ".1rem",
-                  color: "secondary.main",
                   textDecoration: "none",
                 }}
               >

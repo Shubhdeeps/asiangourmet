@@ -8,11 +8,7 @@ export default function SectionTwo() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        gap: "40px",
-        flexDirection: {
-          md: "row",
-          xs: "column",
-        },
+        gap: { xs: "10px", md: "30px" },
       }}
     >
       <ProductHighlighted heading="200+" title="PRODUCTS" color="red" />

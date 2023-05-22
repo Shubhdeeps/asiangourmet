@@ -6,13 +6,22 @@ import { styled } from "@mui/material/styles";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const tabs = {
-  "/": 0,
-  "/home": 0,
-  "/products": 1,
-  "/aboutus": 2,
-  "/contact": 3,
+  "": 0,
+  home: 0,
+  products: 1,
+  aboutus: 2,
+  contact: 3,
 };
 
+const tabsProxy = new Proxy(tabs, {
+  get(target, prop: "", _receiver) {
+    if (!tabs[prop]) {
+      return null;
+    } else {
+      return target[prop];
+    }
+  },
+});
 const navigation = {
   0: "/home",
   1: "/products/hot",
@@ -26,12 +35,16 @@ interface StyledTabsProps {
   onChange: (event: React.SyntheticEvent, newValue: number) => void;
 }
 
-const StyledTabs = styled((props: StyledTabsProps) => (
-  <Tabs
-    {...props}
-    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
-  />
-))({
+const StyledTabs = styled((props: StyledTabsProps) => {
+  return (
+    <Tabs
+      {...props}
+      TabIndicatorProps={{
+        children: <span className={"MuiTabs-indicatorSpan"} />,
+      }}
+    />
+  );
+})({
   "& .MuiTabs-indicator": {
     display: "flex",
     justifyContent: "center",
@@ -50,9 +63,9 @@ interface StyledTabProps {
   label: string;
 }
 
-const StyledTab = styled((props: StyledTabProps) => (
-  <Tab disableRipple {...props} />
-))(({ theme }) => ({
+const StyledTab = styled((props: StyledTabProps) => {
+  return <Tab disableRipple {...props} />;
+})(({ theme }) => ({
   color: "#2D2D2D",
   textTransform: "none",
   fontWeight: 700,
@@ -69,8 +82,9 @@ const StyledTab = styled((props: StyledTabProps) => (
 export default function HeaderTabs() {
   const location = useLocation();
   const navigate = useNavigate();
-  const pathname = location.pathname as "/";
-  const [value, setValue] = React.useState(tabs[pathname]);
+  const pathname = location.pathname.split("/")[1] as "";
+
+  const [value, setValue] = React.useState(+tabsProxy[pathname]);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

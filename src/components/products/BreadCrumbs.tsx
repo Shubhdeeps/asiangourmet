@@ -1,35 +1,45 @@
-import * as React from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 
-function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-  event.preventDefault();
-  console.info("You clicked a breadcrumb.");
-}
+export default function BreadCrumbs({ path }: { path: string[] }) {
+  const breadCrumb = path.map((eachPath, index) => {
+    const newPath = [...path];
+    const currentPath = newPath.splice(0, index + 1).join("/");
+    const lastItem = index + 1 === path.length;
 
-export default function BreadCrumbs() {
-  const breadcrumbs = [
-    <Link
-      underline="hover"
-      key="1"
-      color="inherit"
-      href="/"
-      onClick={handleClick}
-    >
-      Fruits
-    </Link>,
-
-    <Typography key="3" color="text.primary">
-      Fresh Fruits
-    </Typography>,
-  ];
+    if (lastItem) {
+      return (
+        <Typography
+          sx={{
+            textTransform: "capitalize",
+          }}
+          key="3"
+          color="text.primary"
+        >
+          {decodeURI(eachPath)}
+        </Typography>
+      );
+    }
+    return (
+      <Link
+        underline="hover"
+        color="inherit"
+        href={`/${currentPath}`}
+        sx={{
+          textTransform: "capitalize",
+        }}
+        key={eachPath}
+      >
+        {decodeURI(eachPath)}
+      </Link>
+    );
+  });
 
   return (
     <>
-      {" "}
       <Breadcrumbs separator="›" aria-label="breadcrumb">
-        {breadcrumbs}
+        {breadCrumb}
       </Breadcrumbs>
     </>
   );

@@ -8,6 +8,7 @@ import mango from "../../assets/images/topselling/mango.png";
 import okra from "../../assets/images/topselling/okra.png";
 import pipinomelon from "../../assets/images/topselling/pipinomelon.png";
 import { Product } from "../../models/Product.model";
+import MobileCard from "../products/MobileCard";
 const foodProducts: Product[] = [
   {
     id: "1",
@@ -52,18 +53,43 @@ export default function HotSelling() {
       <Heading title="Hot Selling Products" />
       <Box
         sx={{
-          display: "flex",
-          // flexDirection: { sm: "column", xs: "column", md: "row" },
-          flexWrap: "wrap",
-          gap: "20px",
-          justifyContent: "center",
           width: "100%",
+          mb: {
+            sm: "30px",
+            xs: "120px",
+          },
+          display: "grid",
+          gridTemplateColumns: {
+            sm: "repeat(auto-fill, 270px)",
+            xs: "repeat(auto-fill, 130px)",
+          },
+          gridGap: {
+            sm: "1rem",
+            xs: "0.2rem",
+          },
+          justifyContent: "center",
+          mt: 5,
         }}
       >
         {foodProducts.map((product) => {
           return (
             <Fragment key={product.id}>
-              <ProductCard props={product} />
+              <Box
+                display={{
+                  xs: "none",
+                  sm: "flex",
+                }}
+              >
+                <ProductCard props={product} />
+              </Box>
+              <Box
+                display={{
+                  xs: "flex",
+                  sm: "none",
+                }}
+              >
+                <MobileCard props={product} />
+              </Box>
             </Fragment>
           );
         })}

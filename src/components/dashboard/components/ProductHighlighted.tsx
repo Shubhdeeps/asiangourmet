@@ -18,22 +18,42 @@ export default function ProductHighlighted({
         // onMouseOut={() => setIsMouseOver(false)}
         className="card-bg"
         sx={{
-          width: "170px",
-          height: "170px",
+          width: {
+            md: "170px",
+            sm: "140px",
+            xs: "90px",
+          },
+          height: {
+            md: "170px",
+            sm: "140px",
+            xs: "90px",
+          },
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
         }}
       >
-        <Box position="absolute" bottom="-10px" right="-10px">
+        <Box
+          position="absolute"
+          bottom={{ md: "-10px", xs: "-40px" }}
+          right={{ md: "-10px", xs: "-40" }}
+          display={{
+            xs: "none",
+            sm: "flex",
+          }}
+        >
           {blurBlobs(color)}
         </Box>
 
-        <Typography sx={{ fontSize: "32px", fontWeight: 700 }}>
+        <Typography
+          sx={{ fontSize: { sm: "22px", xs: "16px" }, fontWeight: 700 }}
+        >
           {heading}
         </Typography>
-        <Typography sx={{ fontSize: "19px", fontWeight: 300 }}>
+        <Typography
+          sx={{ fontSize: { sm: "14px", xs: "9px" }, fontWeight: 300 }}
+        >
           {title}
         </Typography>
       </Box>

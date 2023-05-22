@@ -19,11 +19,14 @@ export default function OrderNow() {
       <Box
         sx={{
           width: "100%",
-          minHeight: "600px",
+          minHeight: {
+            sm: "600px",
+            xs: "300px",
+          },
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-between",
+          // justifyContent: "space-between",
         }}
       >
         <Heading title="Order Now" />
@@ -53,7 +56,7 @@ export default function OrderNow() {
             height: {
               md: "550px",
               sm: "450px",
-              xs: "380px",
+              xs: "80vw",
             },
             borderRadius: "50% 50% 0px 0px",
             display: "flex",

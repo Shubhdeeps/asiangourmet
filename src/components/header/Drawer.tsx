@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   drawer: {
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
     backdropFilter: "blur(10px)",
     boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.3)",
     display: "block",
@@ -19,14 +19,19 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const pages = [
+  { path: "/home", value: "Home" },
+  { path: "/products/hot", value: "Products" },
+  { path: "/aboutus", value: "About us" },
+  { path: "/contact", value: "Contact" },
+];
+
 export default function CustomDrawer({
   mobileOpen,
   handleDrawerToggle,
-  pages,
 }: {
   mobileOpen: boolean;
   handleDrawerToggle: any;
-  pages: string[];
 }) {
   const navigate = useNavigate();
   const container =
@@ -40,12 +45,12 @@ export default function CustomDrawer({
       </Typography>
       <Divider />
       {pages.map((item) => (
-        <ListItem key={item} disablePadding>
+        <ListItem key={item.path} disablePadding>
           <ListItemButton
             sx={{ textAlign: "center" }}
-            onClick={() => navigate(item.replace(/\s/g, "").toLowerCase())}
+            onClick={() => navigate(item.path)}
           >
-            <ListItemText primary={item} />
+            <ListItemText primary={item.value} />
           </ListItemButton>
         </ListItem>
       ))}

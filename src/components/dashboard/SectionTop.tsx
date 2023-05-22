@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function SectionTop() {
   const navigate = useNavigate();
-  const handleProductMenu = () => navigate("/products");
+  const handleProductMenu = () => navigate("/products/hot");
   return (
     <Box
       display="flex"
@@ -92,8 +92,8 @@ export default function SectionTop() {
       <Box
         sx={{
           width: {
-            xs: "80%",
-            sm: "80%",
+            xs: "110%",
+            sm: "76%",
             md: "60%",
           },
         }}
