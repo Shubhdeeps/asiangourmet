@@ -1,14 +1,17 @@
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { numberTo2DigitDecimal } from "../../../utils/priceTo2DigitDecimal";
 
 type Props = {
   price: number;
   quantity: number;
   quantityType: string;
+  discount?: number;
 };
 
 export default function QuantityAndPrice({
   price,
+  discount,
   quantity,
   quantityType,
 }: Props) {
@@ -23,7 +26,7 @@ export default function QuantityAndPrice({
       <Box
         sx={{
           fontWeight: 700,
-          fontSize: "14px",
+          fontSize: { md: "14px", xs: "9px" },
           color: "secondary.main",
           padding: "6px 12px",
           borderRadius: "12px",
@@ -33,14 +36,34 @@ export default function QuantityAndPrice({
         {quantity} {quantityType}
       </Box>
 
-      <Typography
-        sx={{
-          fontWeight: 800,
-          fontSize: "22px",
-        }}
-      >
-        €{price}
-      </Typography>
+      <Box display="flex" alignItems={"center"} gap={0.5}>
+        {discount && discount !== price && (
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: {
+                md: "16px",
+                xs: "10px",
+              },
+              color: "#C4C4C4",
+              textDecoration: "line-through",
+            }}
+          >
+            {numberTo2DigitDecimal(price)}
+          </Typography>
+        )}
+        <Typography
+          sx={{
+            fontWeight: 600,
+            fontSize: {
+              md: "22px",
+              xs: "16px",
+            },
+          }}
+        >
+          {numberTo2DigitDecimal(discount || price)}
+        </Typography>
+      </Box>
     </Box>
   );
 }

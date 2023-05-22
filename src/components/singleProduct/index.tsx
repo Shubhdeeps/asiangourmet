@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import noimage from "../../assets/images/noimage.jpg";
 import { Product } from "../../models/Product.model";
+import { numberTo2DigitDecimal } from "../../utils/priceTo2DigitDecimal";
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -37,7 +38,7 @@ const ProductPopup = ({
   product: Product;
 }) => {
   const classes = useStyles();
-
+  const { price, discount } = product;
   return (
     <Dialog open={open} onClose={onClose} classes={{ paper: classes.dialog }}>
       <DialogTitle>{product.name}</DialogTitle>
@@ -62,10 +63,28 @@ const ProductPopup = ({
             {product.quantity} {product.quantityType}
           </Box>
         </DialogContentText>
-        <Typography color="#000000" fontWeight="700" variant="h4">
-          {`€${product.price}`}
-        </Typography>
-        <Box></Box>
+        <Box display="flex" alignItems="center" gap={0.5}>
+          {discount && discount !== price && (
+            <Typography
+              sx={{
+                fontWeight: 400,
+                fontSize: "16px",
+                color: "#C4C4C4",
+                textDecoration: "line-through",
+              }}
+            >
+              {numberTo2DigitDecimal(price)}
+            </Typography>
+          )}
+          <Typography
+            sx={{
+              fontWeight: 600,
+              fontSize: "22px",
+            }}
+          >
+            {numberTo2DigitDecimal(discount || price)}
+          </Typography>
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button color="inherit" onClick={onClose}>

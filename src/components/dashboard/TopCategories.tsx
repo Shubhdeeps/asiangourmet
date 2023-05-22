@@ -20,9 +20,17 @@ export default function TopCategories() {
           },
         }}
       >
-        <Category img={veggies} title="VEGETABLES" />
-        <Category img={fruits} title="FRUITS" />
-        <Category img={spices} title="SPICES" />
+        <Category
+          img={veggies}
+          title="VEGETABLES"
+          link="/products/vegetables"
+        />
+        <Category img={fruits} title="FRUITS" link="/products/fruits" />
+        <Category
+          img={spices}
+          title="SPICES"
+          link="/products/leaves,%20herbs%20&%20spices"
+        />
       </Box>
     </>
   );

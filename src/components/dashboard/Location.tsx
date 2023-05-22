@@ -4,6 +4,10 @@ import NavigationIcon from "@mui/icons-material/Navigation";
 import IconButton from "@mui/material/IconButton";
 import location from "../../assets/images/location.png";
 export default function Location() {
+  const handleNavigate = () =>
+    window.open(
+      "https://www.google.com/maps/place/Asian+Gourmet/@59.4411184,24.7336125,17z/data=!3m1!4b1!4m6!3m5!1s0x4692936b06ac9b51:0x2a8ea38c09e912c7!8m2!3d59.4411157!4d24.7361874!16s%2Fg%2F11tg8ps4cv"
+    );
   return (
     <Box
       display="flex"
@@ -59,11 +63,7 @@ export default function Location() {
           We are located in the center of Balti Jaam Market
         </Typography>
         <IconButton
-          onClick={() =>
-            window.open(
-              "https://www.google.com/maps/place/Asian+Gourmet/@59.4411184,24.7336125,17z/data=!3m1!4b1!4m6!3m5!1s0x4692936b06ac9b51:0x2a8ea38c09e912c7!8m2!3d59.4411157!4d24.7361874!16s%2Fg%2F11tg8ps4cv"
-            )
-          }
+          onClick={handleNavigate}
           sx={{
             px: "50px",
             borderRadius: "30px",
@@ -83,7 +83,7 @@ export default function Location() {
           },
         }}
       >
-        <img src={location} width="100%" />
+        <img onClick={handleNavigate} src={location} width="100%" />
       </Box>
     </Box>
   );

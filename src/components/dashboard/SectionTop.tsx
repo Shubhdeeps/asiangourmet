@@ -60,21 +60,38 @@ export default function SectionTop() {
         >
           Fresh goods from Asia Delivered Direct To Your Door
         </Typography>
-        <Typography
+        <Box
           sx={{
-            fontSize: { md: "18px", sm: "12px" },
-            fontWeight: 400,
-            width: "80%",
-            textAlign: {
-              xs: "center",
-              sm: "center",
-              md: "start",
+            padding: {
+              xs: 2,
+              md: 0,
             },
+            borderRadius: "15px",
+            display: {
+              xs: "flex",
+              md: "unset",
+            },
+            alignItems: "center",
+            justifyContent: "center",
+            background: { xs: "rgba(247, 247, 247, 0.9)", md: "none" },
           }}
         >
-          Experience the diversity of Asian cuisine. Our selection of products
-          from all over the continent is sure to inspire your next meal.
-        </Typography>
+          <Typography
+            sx={{
+              fontSize: { md: "18px", sm: "12px" },
+              fontWeight: 400,
+              width: "80%",
+              textAlign: {
+                xs: "center",
+                sm: "center",
+                md: "start",
+              },
+            }}
+          >
+            Experience the diversity of Asian cuisine. Our selection of products
+            from all over the continent is sure to inspire your next meal.
+          </Typography>
+        </Box>
         <Button
           onClick={handleProductMenu}
           variant="contained"

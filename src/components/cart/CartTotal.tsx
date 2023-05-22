@@ -10,7 +10,7 @@ export default function CartTotal() {
   useEffect(() => {
     let total = 0;
     cartItems.forEach((item) => {
-      const totalForCurrItem = item.count * item.price;
+      const totalForCurrItem = item.count * (item.discount || item.price);
       total += totalForCurrItem;
     });
     setCartTotal(total);
@@ -37,7 +37,7 @@ export default function CartTotal() {
           },
         }}
       >
-        Total: €{cartTotal}
+        Total: €{(Math.round(cartTotal * 100) / 100).toFixed(2)}
       </Typography>
       <Button
         disabled={cartTotal === 0}

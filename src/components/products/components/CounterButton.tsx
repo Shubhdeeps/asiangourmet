@@ -3,6 +3,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const CounterButtons = ({
   variant,
@@ -29,13 +30,23 @@ export const CounterButtons = ({
       }}
     >
       <IconButton onClick={(e) => handleAddtoCart(e, "REMOVE")}>
-        <RemoveIcon
-          sx={{
-            fontSize: "medium",
-          }}
-          color="error"
-          fontSize="small"
-        />
+        {count === 1 ? (
+          <DeleteIcon
+            sx={{
+              fontSize: "medium",
+            }}
+            color="error"
+            fontSize="small"
+          />
+        ) : (
+          <RemoveIcon
+            sx={{
+              fontSize: "medium",
+            }}
+            color="error"
+            fontSize="small"
+          />
+        )}
       </IconButton>
       <Typography
         sx={{

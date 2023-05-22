@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { CounterButtons } from "../products/components/CounterButton";
 import { CartProduct } from "../../models/CartProduct.model";
 import { addProductToCart } from "../../utils/addProductToTheCart";
+import QuantityAndPrice from "../products/components/QuantityAndPrice";
 
 export default function CartItem({ product }: { product: CartProduct }) {
   const [counter, setCounter] = useState(product.count);
@@ -11,6 +12,7 @@ export default function CartItem({ product }: { product: CartProduct }) {
   useEffect(() => {
     setCounter(product.count);
   }, [product.count]);
+
   const handleAddtoCart = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     action: "ADD" | "REMOVE"
@@ -41,13 +43,13 @@ export default function CartItem({ product }: { product: CartProduct }) {
           width: "fit-content",
           display: "flex",
           alignItems: "center",
-          gap: 4,
+          gap: 1,
           height: {
             md: "140px",
             sm: "90px",
             xs: "52px",
           },
-          paddingInlineEnd: 3,
+          paddingInlineEnd: 0,
         }}
       >
         <Box
@@ -69,10 +71,11 @@ export default function CartItem({ product }: { product: CartProduct }) {
           />
         </Box>
         <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="start"
-          height="80%"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "start",
+          }}
         >
           <Typography
             sx={{
@@ -86,49 +89,28 @@ export default function CartItem({ product }: { product: CartProduct }) {
           >
             {product.name}
           </Typography>
-          <Typography
+          <Box
             sx={{
-              fontWeight: 400,
-              color: "text.secondary",
-              fontSize: {
-                md: "18px",
-                sm: "14px",
-                xs: "9px",
-              },
-              mt: {
-                md: "-8px",
-                xs: "-4px",
-              },
+              background: "#F5F5F5",
+              borderRadius: "10px",
             }}
           >
-            {product.quantity} {product.quantityType}
-          </Typography>
-          <Typography
-            sx={{
-              fontWeight: 600,
-              fontSize: {
-                md: "32px",
-                sm: "24px",
-                xs: "14px",
-              },
-              marginRight: "auto",
-            }}
-          >
-            €{product.price * counter}
-          </Typography>
+            <CounterButtons
+              handleAddtoCart={handleAddtoCart}
+              count={counter}
+              variant={"row"}
+            />
+          </Box>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          background: "#F5F5F5",
-          borderRadius: "10px",
-        }}
-      >
-        <CounterButtons
-          handleAddtoCart={handleAddtoCart}
-          count={counter}
-          variant={"column-reverse"}
-        />
+
+        <Box sx={{ alignSelf: "end" }}>
+          <QuantityAndPrice
+            price={product.price}
+            quantity={product.quantity}
+            quantityType={product.quantityType}
+            discount={product.discount}
+          />
+        </Box>
       </Box>
     </Box>
   );

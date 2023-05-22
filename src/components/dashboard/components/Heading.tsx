@@ -5,7 +5,7 @@ export default function Heading({ title }: { title: string }) {
     <Typography
       sx={{
         fontWeight: 700,
-        fontSize: { md: "58px", xs: "34px" },
+        fontSize: { md: "58px", sm: "34px", xs: "24px" },
         textAlign: "center",
       }}
     >

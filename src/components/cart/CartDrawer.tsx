@@ -12,7 +12,7 @@ import CartItem from "./CartItem";
 import Typography from "@mui/material/Typography";
 import CartTotal from "./CartTotal";
 
-const drawerBleeding = 56;
+const drawerBleeding = 36;
 
 interface Props {
   /**
@@ -67,7 +67,7 @@ export default function SwipeableEdgeDrawer(props: Props) {
       <Global
         styles={{
           ".MuiDrawer-root > .MuiPaper-root": {
-            width: `calc(${windowWidth}% - ${drawerBleeding}px)`,
+            width: `calc(${windowWidth}% - ${drawerBleeding + 30}px)`,
             overflow: "visible",
           },
         }}

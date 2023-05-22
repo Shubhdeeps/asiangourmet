@@ -6,18 +6,28 @@ import QuantityAndPrice from "./components/QuantityAndPrice";
 import { Product } from "../../models/Product.model";
 import { cartProducts } from "../../store";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { calculateDiscountPercentage } from "../../utils/calculateDiscountPercentage";
 function ProductCard({ props }: { props: Product }) {
-  const { name, imageURL, price, quantity, quantityType, id } = props;
+  const { name, imageURL, price, quantity, quantityType, id, category } = props;
   const currProduct = cartProducts.value.find((item) => item.id === id);
+  const navigate = useNavigate();
+  const discountedPrice = calculateDiscountPercentage(price, props.discount);
 
   const [itemCount, setItemCount] = useState(
     currProduct ? currProduct.count : 0
   );
+
   useEffect(() => {
     setItemCount(currProduct ? currProduct.count : 0);
   }, [currProduct]);
+
+  const handleNavigate = () => {
+    navigate(`/products/${category}/product?name=${encodeURI(name)}`);
+  };
   return (
     <Box
+      onClick={handleNavigate}
       display="flex"
       className="glass"
       flexDirection="column"
@@ -34,6 +44,25 @@ function ProductCard({ props }: { props: Product }) {
       }}
     >
       <Box width="100%" height="65%" borderRadius="10px">
+        {!!discountedPrice && (
+          <Box
+            sx={{
+              position: "absolute",
+              top: 15,
+            }}
+          >
+            <Chip
+              sx={{
+                borderRadius: "0px 20px 20px 0px",
+                px: 1,
+                fontSize: "14px",
+              }}
+              color="error"
+              size="medium"
+              label={`SAVE ${discountedPrice}`}
+            />
+          </Box>
+        )}
         <img
           width="100%"
           height="100%"
@@ -80,6 +109,7 @@ function ProductCard({ props }: { props: Product }) {
           price={price}
           quantity={quantity}
           quantityType={quantityType}
+          discount={props.discount}
         />
       </Box>
     </Box>

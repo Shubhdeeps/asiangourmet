@@ -137,6 +137,7 @@ export default function SingleProduct() {
               price={product.price}
               quantity={product.quantity}
               quantityType={product.quantityType}
+              discount={product.discount}
             />
           </Box>
         </Box>

@@ -1,9 +1,20 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
-export function Category({ title, img }: { title: string; img: any }) {
+export function Category({
+  title,
+  img,
+  link,
+}: {
+  title: string;
+  img: any;
+  link: string;
+}) {
+  const navigate = useNavigate();
   return (
     <Box
+      onClick={() => navigate(link)}
       className="top-category-card"
       display="flex"
       flexDirection="column"
