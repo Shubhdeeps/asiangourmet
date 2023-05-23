@@ -8,8 +8,8 @@ export const indexDB =
   (window as any).msIndexedDB ||
   (window as any).shimIndexedDB;
 
-const dbName = "productsDB";
-export const productStoreName = "products";
+export const dbName = "productsDB-1";
+export const productStoreName = "products-1";
 
 export function initDB() {
   const request = indexDB.open(dbName, 1);
@@ -26,6 +26,7 @@ export function initDB() {
     store.createIndex("p_category", ["category"], { unique: false });
     store.createIndex("p_price", ["price"], { unique: false });
     store.createIndex("p_name", ["name"], { unique: false });
+    store.createIndex("p_popular", ["popular"], { unique: false });
     store.createIndex("p_category_name", ["category", "name"], {
       unique: false,
     });

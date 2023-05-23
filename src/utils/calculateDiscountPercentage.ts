@@ -1,5 +1,5 @@
 export function calculateDiscountPercentage(price: number, discount?: number) {
-  if (!discount) {
+  if (!discount || discount === price) {
     return null;
   }
   const discountedPercentage = ((price - discount) / price) * 100;

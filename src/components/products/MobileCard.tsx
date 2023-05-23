@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { calculateDiscountPercentage } from "../../utils/calculateDiscountPercentage";
 import Chip from "@mui/material/Chip";
 import { numberTo2DigitDecimal } from "../../utils/priceTo2DigitDecimal";
+import MotionWrapper from "./components/MotionWrapper";
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -39,6 +40,7 @@ export default function MobileCard({ props }: { props: Product }) {
     currProduct ? currProduct.count : 0
   );
 
+  const isOutOfStock = !!props.outOfStock;
   const discountedPrice = calculateDiscountPercentage(price, props.discount);
 
   const handleNavigate = () => {
@@ -48,116 +50,137 @@ export default function MobileCard({ props }: { props: Product }) {
     setItemCount(currProduct ? currProduct.count : 0);
   }, [currProduct]);
   return (
-    <StyledBadge badgeContent={itemCount} color="success">
-      <Box
-        onClick={handleNavigate}
-        display="flex"
-        className="glass"
-        flexDirection="column"
-        gap="5px"
-        border="1px solid #F7F7F7"
-        sx={{
-          height: {
-            md: "380px",
-            xs: "180px",
-          },
-          width: {
-            md: "260px",
-            xs: "130px",
-          },
-        }}
-      >
-        <Box width="100%" height="55%">
-          {!!discountedPrice && (
-            <Box
-              sx={{
-                position: "absolute",
-                top: 15,
-              }}
-            >
-              <Chip
-                sx={{
-                  borderRadius: "0px 20px 20px 0px",
-                  fontSize: "10px",
-                }}
-                color="error"
-                size="medium"
-                label={`SAVE ${discountedPrice}`}
-              />
-            </Box>
-          )}
-          <img width="100%" height="100%" src={imageURL ? imageURL : noimage} />
-        </Box>
+    <MotionWrapper>
+      <StyledBadge badgeContent={itemCount} color="success">
         <Box
+          onClick={handleNavigate}
+          display="flex"
+          className="glass"
+          flexDirection="column"
+          gap="5px"
+          border="1px solid #F7F7F7"
           sx={{
-            px: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "start",
-            height: "100%",
+            height: {
+              md: "380px",
+              xs: "180px",
+            },
+            width: {
+              md: "260px",
+              xs: "130px",
+            },
           }}
         >
-          <Typography
-            sx={{
-              fontSize: "9px",
-              fontWeight: 700,
-            }}
-          >
-            {name} ({quantityType})
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: "8px",
-              fontWeight: 300,
-            }}
-          >
-            €{price / quantity}/{quantity}
-            {quantityType}
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="start"
-            gap={0.5}
-            sx={{
-              mt: "auto",
-            }}
-          >
-            {discount && discount !== price && (
-              <Typography
+          <Box width="100%" height="55%">
+            {!!discountedPrice && (
+              <Box
                 sx={{
-                  fontWeight: 400,
-                  fontSize: "9px",
-                  mb: "-7px",
-                  color: "#C4C4C4",
-                  textDecoration: "line-through",
+                  position: "absolute",
+                  top: 15,
                 }}
               >
-                {numberTo2DigitDecimal(price)}
-              </Typography>
+                <Chip
+                  sx={{
+                    borderRadius: "0px 20px 20px 0px",
+                    fontSize: "10px",
+                  }}
+                  color="error"
+                  size="medium"
+                  label={`SAVE ${discountedPrice}`}
+                />
+              </Box>
             )}
-            <Typography
-              sx={{
-                fontSize: "14px",
-                fontWeight: 600,
-              }}
-            >
-              {numberTo2DigitDecimal(discount || price)}
-            </Typography>
+            <img
+              width="100%"
+              height="100%"
+              src={imageURL ? imageURL : noimage}
+            />
           </Box>
           <Box
             sx={{
-              background: "#30C4D9",
-              borderRadius: "15px 0px 0px 0px",
-              position: "absolute",
-              right: 0,
-              bottom: 0,
+              px: 1,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "start",
+              height: "100%",
             }}
           >
-            <MobileAddToCartButton product={props} initCount={itemCount} />
+            <Typography
+              sx={{
+                fontSize: "9px",
+                fontWeight: 700,
+              }}
+            >
+              {name} ({quantityType})
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: "8px",
+                fontWeight: 300,
+              }}
+            >
+              €{price / quantity}/{quantity}
+              {quantityType}
+            </Typography>
+            {isOutOfStock ? (
+              <Chip
+                sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  borderRadius: "0px",
+                  fontSize: "10px",
+                  color: "error.main",
+                }}
+                size="small"
+                label="OUT OF STOCK"
+              />
+            ) : (
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="start"
+                gap={0.5}
+                sx={{
+                  mt: "auto",
+                }}
+              >
+                {!!discount && discount !== price && (
+                  <Typography
+                    sx={{
+                      fontWeight: 400,
+                      fontSize: "9px",
+                      mb: "-7px",
+                      color: "#C4C4C4",
+                      textDecoration: "line-through",
+                    }}
+                  >
+                    {numberTo2DigitDecimal(price)}
+                  </Typography>
+                )}
+                <Typography
+                  sx={{
+                    fontSize: "14px",
+                    fontWeight: 600,
+                  }}
+                >
+                  {numberTo2DigitDecimal(discount || price)}
+                </Typography>
+              </Box>
+            )}
+            <Box
+              sx={{
+                background: isOutOfStock ? "#E4E4E4" : "#30C4D9",
+                borderRadius: "15px 0px 0px 0px",
+                position: "absolute",
+                right: 0,
+                bottom: 0,
+              }}
+            >
+              <MobileAddToCartButton product={props} initCount={itemCount} />
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </StyledBadge>
+      </StyledBadge>
+    </MotionWrapper>
   );
 }

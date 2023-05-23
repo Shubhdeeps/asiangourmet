@@ -14,6 +14,8 @@ export default function MobileAddToCartButton({
 }) {
   const [counter, setCounter] = useState(initCount);
 
+  const isOutOfStock = !!product.outOfStock;
+
   useEffect(() => {
     setCounter(initCount);
   }, [initCount]);
@@ -35,7 +37,10 @@ export default function MobileAddToCartButton({
   return (
     <>
       {counter === 0 ? (
-        <IconButton onClick={(e) => handleAddtoCart(e, "ADD")}>
+        <IconButton
+          disabled={isOutOfStock}
+          onClick={(e) => handleAddtoCart(e, "ADD")}
+        >
           <AddShoppingCartIcon
             sx={{
               color: "#FAFCFE",

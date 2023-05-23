@@ -37,7 +37,7 @@ export default function QuantityAndPrice({
       </Box>
 
       <Box display="flex" alignItems={"center"} gap={0.5}>
-        {discount && discount !== price && (
+        {!!discount && discount !== price && (
           <Typography
             sx={{
               fontWeight: 400,

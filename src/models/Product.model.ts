@@ -7,4 +7,6 @@ export interface Product {
   quantity: number;
   imageURL: string;
   discount?: number;
+  outOfStock?: boolean;
+  popular?: boolean;
 }

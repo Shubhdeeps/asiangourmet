@@ -1,12 +1,13 @@
 import Drawer from "@material-ui/core/Drawer";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { makeStyles } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
+import { pages } from "./consts";
 
 const useStyles = makeStyles(() => ({
   drawer: {
@@ -18,13 +19,6 @@ const useStyles = makeStyles(() => ({
     boxSizing: "border-box",
   },
 }));
-
-const pages = [
-  { path: "/home", value: "Home" },
-  { path: "/products/hot", value: "Products" },
-  { path: "/aboutus", value: "About us" },
-  { path: "/contact", value: "Contact" },
-];
 
 export default function CustomDrawer({
   mobileOpen,
@@ -40,9 +34,24 @@ export default function CustomDrawer({
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2, fontWeight: 700 }}>
-        Asian Gourmet
-      </Typography>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          my: 1,
+        }}
+      >
+        <Box
+          sx={{
+            width: "160px",
+            height: "70px",
+          }}
+        >
+          <img width="100%" height="100%" src={logo} />
+        </Box>
+      </Box>
       <Divider />
       {pages.map((item) => (
         <ListItem key={item.path} disablePadding>

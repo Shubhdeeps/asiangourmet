@@ -1,7 +1,5 @@
 import { Product } from "../models/Product.model";
-import { indexDB, productStoreName } from "./indexedDB";
-
-const dbName = "productsDB";
+import { dbName, indexDB, productStoreName } from "./indexedDB";
 
 export const getDataBasedOnFilters = (
   filter: string,
@@ -20,6 +18,36 @@ export const getDataBasedOnFilters = (
 
     const categoryQuery = store.index("p_category");
     const queryRes = categoryQuery.getAll([filter]);
+    //close the db on complete
+    queryRes.onsuccess = () => {
+      const response = queryRes.result;
+
+      if (response.length === 0) {
+        // fetch data from firestore and update to db
+      }
+      setData(response);
+    };
+    transaction.oncomplete = () => db.close();
+  };
+  return;
+};
+
+export const getAllPopularProducts = (
+  setData: React.Dispatch<React.SetStateAction<Product[] | null>>
+) => {
+  const request = indexDB.open(dbName, 1);
+
+  request.onerror = (event) => {
+    console.log(event);
+  };
+
+  request.onsuccess = () => {
+    const db = request.result;
+    const transaction = db.transaction(productStoreName, "readwrite");
+    const store = transaction.objectStore(productStoreName);
+
+    const categoryQuery = store.index("p_popular");
+    const queryRes = categoryQuery.getAll();
     //close the db on complete
     queryRes.onsuccess = () => {
       const response = queryRes.result;

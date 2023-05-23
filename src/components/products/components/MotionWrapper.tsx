@@ -2,7 +2,7 @@ import { motion, Variants } from "framer-motion";
 
 const cardVariants: Variants = {
   offscreen: {
-    y: 200,
+    y: 100,
     opacity: 0,
   },
   onscreen: {
@@ -17,20 +17,18 @@ const cardVariants: Variants = {
 };
 
 type Props = {
-  onClick: () => void;
   children: React.ReactNode;
 };
 
-export default function MotionWrapper({ onClick, children }: Props) {
+export default function MotionWrapper({ children }: Props) {
   return (
     <motion.div
       className="box noselect"
       initial="offscreen"
       whileInView="onscreen"
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: true, amount: 0 }}
       // transition={{ type: "keyframes", stiffness: 400, damping: 10 }}
       variants={cardVariants}
-      onClick={onClick}
     >
       {children}
     </motion.div>

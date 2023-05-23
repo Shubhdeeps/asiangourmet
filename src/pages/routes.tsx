@@ -3,11 +3,13 @@ import { lazy, Suspense } from "react";
 import Layout from "../layout/Layout";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Spinner from "../components/spinner";
-
+import AboutUs from "./aboutus";
 const Dashboard = lazy(() => import("./dashboard"));
 const Category = lazy(() => import("./products/[Category]"));
 const SingleProduct = lazy(() => import("./products/singleProduct"));
 const Products = lazy(() => import("./products"));
+const HotThisWeek = lazy(() => import("./hotThisWeek"));
+const Checkout = lazy(() => import("./checkout"));
 
 export const router = createBrowserRouter([
   {
@@ -39,7 +41,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/product",
+        path: "/products",
         element: (
           <Suspense fallback={<Spinner />}>
             <Products />
@@ -56,25 +58,25 @@ export const router = createBrowserRouter([
       },
       {
         path: "/aboutus",
-        element: <h3>aboutus</h3>,
+        element: <AboutUs />,
       },
       {
-        path: "/contact",
-        element: <h3>contact</h3>,
-      },
-      {
-        path: "/checkout",
+        path: "/hotthisweek",
         element: (
           <Suspense fallback={<Spinner />}>
-            <ProtectedRoutes />
+            <HotThisWeek />
           </Suspense>
         ),
-        children: [
-          {
-            path: "/checkout",
-            element: <h3>Checkout</h3>,
-          },
-        ],
+      },
+    ],
+  },
+  {
+    path: "/checkout",
+    element: <ProtectedRoutes />,
+    children: [
+      {
+        path: "/checkout",
+        element: <Checkout />,
       },
     ],
   },

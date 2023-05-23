@@ -3,9 +3,8 @@ import { Grid, Typography } from "@material-ui/core";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import EmailIcon from "@mui/icons-material/Email";
-
+import InstagramIcon from "@mui/icons-material/Instagram";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#0B1C1D",
@@ -25,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
 function Footer() {
   const classes = useStyles();
 
+  const handleClick = (link: string) => {
+    window.open(link);
+  };
   return (
     <Box
       sx={{
@@ -56,13 +58,34 @@ function Footer() {
               gap: 1,
             }}
           >
-            <IconButton color="info">
+            <IconButton
+              onClick={() =>
+                handleClick(
+                  "https://www.facebook.com/profile.php?id=100090085818233"
+                )
+              }
+              color="info"
+            >
               <FacebookIcon />
             </IconButton>
-            <IconButton color="success">
-              <WhatsAppIcon />
+            <IconButton
+              onClick={() =>
+                handleClick(
+                  "https://www.instagram.com/asiangourmetestonia/?igshid=MzRlODBiNWFlZA%3D%3D"
+                )
+              }
+              color="info"
+            >
+              <InstagramIcon />
             </IconButton>
-            <IconButton color="inherit">
+            <IconButton
+              onClick={() =>
+                handleClick(
+                  "https://mail.google.com/mail/?view=cm&fs=1&to=asiangourmetestonia@gmail.com&su=Asian%20Gourmet%20Customer&body=BODY"
+                )
+              }
+              color="inherit"
+            >
               <EmailIcon />
             </IconButton>
           </Box>

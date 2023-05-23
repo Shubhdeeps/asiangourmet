@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Tooltip from "@mui/material/Tooltip";
@@ -13,7 +12,7 @@ import { HideOnScroll } from "./HideHeader";
 import HeaderTabs from "./HeaderTabs";
 import Cart from "./Cart";
 import CartDrawer from "../cart/CartDrawer";
-
+import logo from "../../assets/images/logo.png";
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [showCart, setShowCart] = useState(false);
@@ -48,25 +47,6 @@ function Header() {
         >
           <Container maxWidth="xl">
             <Toolbar disableGutters sx={{ gap: "20px" }}>
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "Joti One",
-                  fontWeight: 700,
-                  fontSize: "32px",
-                  letterSpacing: ".1rem",
-                  color: "secondary.main",
-                  textDecoration: "none",
-                }}
-              >
-                Asian Gourmet
-              </Typography>
-
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                 <IconButton
                   size="large"
@@ -82,26 +62,19 @@ function Header() {
                   handleDrawerToggle={handleCloseNavMenu}
                 />
               </Box>
-              <Typography
-                variant="h5"
-                noWrap
-                component="a"
-                href=""
+              <Box
                 sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  fontSize: "20px",
-                  fontWeight: 700,
-                  letterSpacing: ".1rem",
-                  textDecoration: "none",
+                  width: "160px",
+                  height: "70px",
+                  display: {
+                    xs: "none",
+                    md: "flex",
+                  },
                 }}
               >
-                Asian Gourmet
-              </Typography>
-
+                <img width="100%" height="100%" src={logo} />
+              </Box>
               <HeaderTabs />
-
               <Tooltip title="Profile">
                 <Avatar>H</Avatar>
               </Tooltip>

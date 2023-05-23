@@ -1,20 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const tabs = {
-  "": 0,
-  home: 0,
-  products: 1,
-  aboutus: 2,
-  contact: 3,
-};
+import { NAVIGATION, pages, tabs } from "./consts";
 
 const tabsProxy = new Proxy(tabs, {
-  get(target, prop: "", _receiver) {
+  get(target, prop: "", _) {
     if (!tabs[prop]) {
       return null;
     } else {
@@ -22,12 +15,6 @@ const tabsProxy = new Proxy(tabs, {
     }
   },
 });
-const navigation = {
-  0: "/home",
-  1: "/products/hot",
-  2: "/aboutus",
-  3: "/contact",
-};
 
 interface StyledTabsProps {
   children?: React.ReactNode;
@@ -83,12 +70,15 @@ export default function HeaderTabs() {
   const location = useLocation();
   const navigate = useNavigate();
   const pathname = location.pathname.split("/")[1] as "";
-
   const [value, setValue] = React.useState(+tabsProxy[pathname]);
+
+  useEffect(() => {
+    setValue(+tabsProxy[pathname]);
+  }, [pathname]);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    navigate(navigation[newValue as 0 | 1 | 2 | 3]);
+    navigate(NAVIGATION[newValue as 0 | 1 | 2 | 3]);
   };
   return (
     <Box
@@ -104,10 +94,9 @@ export default function HeaderTabs() {
         onChange={handleChange}
         aria-label="styled tabs example"
       >
-        <StyledTab label="Home" />
-        <StyledTab label="Products" />
-        <StyledTab label="About us" />
-        <StyledTab label="Contact" />
+        {pages.map((page) => {
+          return <StyledTab key={page.value} label={page.value} />;
+        })}
       </StyledTabs>
     </Box>
   );

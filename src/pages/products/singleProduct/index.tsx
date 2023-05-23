@@ -6,13 +6,13 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import noimage from "../../../assets/images/noimage.jpg";
 import QuantityAndPrice from "../../../components/products/components/QuantityAndPrice";
-import { CounterButtons } from "../../../components/products/components/CounterButton";
 import { cartProducts } from "../../../store";
 import { CartProduct } from "../../../models/CartProduct.model";
 import { Product } from "../../../models/Product.model";
-import { addProductToCart } from "../../../utils/addProductToTheCart";
 import BreadCrumbs from "../../../components/products/BreadCrumbs";
 import Spinner from "../../../components/spinner";
+import { Chip } from "@mui/material";
+import AddToCartButton from "../../../components/products/components/AddToCartButton";
 
 export default function SingleProduct() {
   const location = useLocation();
@@ -38,28 +38,20 @@ export default function SingleProduct() {
     return <Spinner />;
   }
 
-  const handleAddtoCart = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    action: "ADD" | "REMOVE"
-  ) => {
-    //prevent click to parent element
-    e.stopPropagation();
-    addProductToCart(product, action);
-
-    if (action === "ADD") {
-      setCounter((prevState) => prevState + 1);
-    } else {
-      setCounter((prevState) => prevState - 1);
-    }
-  };
+  const isOutOfStock = !!product.outOfStock;
 
   return (
-    <Container maxWidth="xl">
+    <Container
+      maxWidth="xl"
+      sx={{
+        mt: 5,
+      }}
+    >
       <BreadCrumbs path={["products", product.category, product.name]} />
       <Box
         sx={{
           position: "relative",
-          mt: 3,
+          mt: 5,
           padding: 3,
           display: "flex",
           flexDirection: {
@@ -88,13 +80,15 @@ export default function SingleProduct() {
         <Box
           sx={{
             display: "flex",
-            minWidth: "300px",
+            minWidth: "270px",
             flexDirection: "column",
             alignItems: "start",
             px: 2,
             borderRadius: "5px",
             background: "#F6F6F6",
+            minHeight: "150px",
             alignSelf: "stretch",
+            position: "relative",
           }}
         >
           <Typography
@@ -120,26 +114,40 @@ export default function SingleProduct() {
           >
             {product.category}
           </Typography>
-          <Box>
-            <CounterButtons
-              variant="row"
-              count={counter}
-              handleAddtoCart={handleAddtoCart}
+          {!isOutOfStock && (
+            <>
+              <AddToCartButton product={product} initCount={counter} />
+            </>
+          )}
+          {isOutOfStock ? (
+            <Chip
+              sx={{
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+                borderRadius: "0px 0px 10px 0px",
+                fontSize: "18px",
+                p: 1,
+                color: "error.main",
+              }}
+              size="medium"
+              label="OUT OF STOCK"
             />
-          </Box>
-          <Box
-            sx={{
-              alignSelf: "end",
-              marginTop: "auto",
-            }}
-          >
-            <QuantityAndPrice
-              price={product.price}
-              quantity={product.quantity}
-              quantityType={product.quantityType}
-              discount={product.discount}
-            />
-          </Box>
+          ) : (
+            <Box
+              sx={{
+                alignSelf: "end",
+                marginTop: "auto",
+              }}
+            >
+              <QuantityAndPrice
+                price={product.price}
+                quantity={product.quantity}
+                quantityType={product.quantityType}
+                discount={product.discount}
+              />
+            </Box>
+          )}
         </Box>
       </Box>
     </Container>

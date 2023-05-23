@@ -51,11 +51,18 @@ export default function AddToCartButton({
     }
   };
 
+  const isOutOfStock = !!product.outOfStock;
   return (
     <>
       {counter === 0 ? (
-        <IconButton onClick={(e) => handleAddtoCart(e, "ADD")}>
-          <AddShoppingCartIcon color="success" fontSize="medium" />
+        <IconButton
+          disabled={isOutOfStock}
+          onClick={(e) => handleAddtoCart(e, "ADD")}
+        >
+          <AddShoppingCartIcon
+            color={isOutOfStock ? "disabled" : "success"}
+            fontSize="medium"
+          />
         </IconButton>
       ) : (
         <CounterButtons
