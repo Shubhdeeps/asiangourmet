@@ -110,7 +110,8 @@ export default function MobileCard({ props }: { props: Product }) {
                 fontWeight: 700,
               }}
             >
-              {name} ({quantityType})
+              {name} ({quantity}
+              {quantityType})
             </Typography>
             <Typography
               sx={{
@@ -118,8 +119,13 @@ export default function MobileCard({ props }: { props: Product }) {
                 fontWeight: 300,
               }}
             >
-              €{price / quantity}/{quantity}
-              {quantityType}
+              {decodeQuantityIntoSimplerForm(
+                quantityType as "g",
+                quantity,
+                discount || price
+              )}
+              {/* {numberTo2DigitDecimal((discount || price) / quantity)}/
+              {quantityType} */}
             </Typography>
             {isOutOfStock ? (
               <Chip
@@ -157,6 +163,7 @@ export default function MobileCard({ props }: { props: Product }) {
                     {numberTo2DigitDecimal(price)}
                   </Typography>
                 )}
+
                 <Typography
                   sx={{
                     fontSize: "14px",
@@ -169,7 +176,7 @@ export default function MobileCard({ props }: { props: Product }) {
             )}
             <Box
               sx={{
-                background: isOutOfStock ? "#E4E4E4" : "#30C4D9",
+                backgroundColor: isOutOfStock ? "#E4E4E4" : "secondary.light",
                 borderRadius: "15px 0px 0px 0px",
                 position: "absolute",
                 right: 0,
@@ -183,4 +190,20 @@ export default function MobileCard({ props }: { props: Product }) {
       </StyledBadge>
     </MotionWrapper>
   );
+}
+
+function decodeQuantityIntoSimplerForm(
+  quantityType: "g" | "pcs" | "kg",
+  quantity: number,
+  price: number
+) {
+  if (quantityType.toLowerCase() === "g") {
+    return `${numberTo2DigitDecimal((price / quantity) * 1000)}/kg`;
+  }
+  if (quantityType.toLowerCase() === "kg") {
+    return `${numberTo2DigitDecimal(price / quantity)}/kg`;
+  }
+  if (quantityType.toLowerCase() === "pcs") {
+    return `${numberTo2DigitDecimal(price / quantity)}/pc`;
+  }
 }

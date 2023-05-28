@@ -70,7 +70,7 @@ export default function Dashboard() {
         width="100%"
         mt="-10px"
       >
-        {waveUp}
+        {waveUp("#F7F7F7")}
       </Box>
       <Box
         sx={{

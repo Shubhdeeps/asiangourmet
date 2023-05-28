@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import { waveDown, waveUp } from "../../../assets/svg/waves";
 
@@ -18,26 +19,24 @@ export default function WaveContainer({
         },
       }}
     >
-      <Box
+      <Paper
         sx={{
           position: "relative",
-
           display: "flex",
           height: { md: "1650px", sm: "1400px", xs: "950px" },
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#f4f4f4",
           zIndex: -1,
         }}
       >
         <Box width="100%" mt="-10px">
-          {waveUp}
+          {waveUp("#F7F7F7")}
         </Box>
 
         <Box width="100%" mb="-10px">
-          {waveDown}
+          {waveDown("#F7F7F7")}
         </Box>
-      </Box>
+      </Paper>
       <Container>
         <Box
           display="flex"

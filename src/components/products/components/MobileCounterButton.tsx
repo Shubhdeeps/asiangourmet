@@ -24,7 +24,7 @@ export const MobileCounterButtons = ({
         <RemoveIcon
           sx={{
             fontSize: "small",
-            color: "#FAFCFE",
+            color: "secondary.main",
           }}
           fontSize="small"
         />
@@ -33,7 +33,7 @@ export const MobileCounterButtons = ({
         <AddIcon
           sx={{
             fontSize: "small",
-            color: "#FAFCFE",
+            color: "secondary.main",
           }}
         />
       </IconButton>

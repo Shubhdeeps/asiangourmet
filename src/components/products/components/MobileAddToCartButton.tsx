@@ -43,7 +43,7 @@ export default function MobileAddToCartButton({
         >
           <AddShoppingCartIcon
             sx={{
-              color: "#FAFCFE",
+              color: "secondary.main",
             }}
             fontSize="small"
           />

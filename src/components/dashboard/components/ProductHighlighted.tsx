@@ -14,8 +14,6 @@ export default function ProductHighlighted({
   return (
     <>
       <Box
-        // onMouseOver={() => setIsMouseOver(true)}
-        // onMouseOut={() => setIsMouseOver(false)}
         className="card-bg"
         sx={{
           width: {
