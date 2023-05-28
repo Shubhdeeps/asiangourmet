@@ -39,6 +39,21 @@ export function removeItemFromCart(itemId: string) {
   };
 }
 
+export function emptyCart() {
+  const request = indexDB.open(dbName, 1);
+  request.onerror = function () {
+    console.error("Error opening IndexedDB database");
+  };
+
+  request.onsuccess = () => {
+    const db = request.result;
+    const transaction = db.transaction(storeName, "readwrite");
+    const store = transaction.objectStore(storeName);
+
+    store.clear();
+  };
+}
+
 export function addItemsToCart(item: CartProduct) {
   const request = indexDB.open(dbName, 1);
   request.onerror = function () {

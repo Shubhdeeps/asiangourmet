@@ -6,7 +6,6 @@ import { styled } from "@mui/material/styles";
 import { bgFlower } from "../../assets/svg/bgFlower";
 import { useNavigate, useParams } from "react-router-dom";
 import { categories } from "../../services/db.model";
-// interface StyledTabsProps: any
 
 export default function FloatingTabs() {
   const { category } = useParams();
@@ -73,7 +72,6 @@ export default function FloatingTabs() {
           xs: "70px",
         },
         position: {
-          md: "sticky",
           xs: "fixed",
         },
         zIndex: "1",

@@ -5,7 +5,7 @@ import { CounterButtons } from "../products/components/CounterButton";
 import { CartProduct } from "../../models/CartProduct.model";
 import { addProductToCart } from "../../utils/addProductToTheCart";
 import QuantityAndPrice from "../products/components/QuantityAndPrice";
-
+import noimage from "../../assets/images/noimage.jpg";
 export default function CartItem({ product }: { product: CartProduct }) {
   const [counter, setCounter] = useState(product.count);
 
@@ -40,7 +40,8 @@ export default function CartItem({ product }: { product: CartProduct }) {
     >
       <Box
         sx={{
-          width: "fit-content",
+          width: "100%",
+          position: "relative",
           display: "flex",
           alignItems: "center",
           gap: 1,
@@ -67,7 +68,7 @@ export default function CartItem({ product }: { product: CartProduct }) {
             className="border-r2"
             height="100%"
             width="100%"
-            src={product.imageURL}
+            src={product.imageURL || noimage}
           />
         </Box>
         <Box
@@ -103,7 +104,12 @@ export default function CartItem({ product }: { product: CartProduct }) {
           </Box>
         </Box>
 
-        <Box sx={{ alignSelf: "end" }}>
+        <Box
+          sx={{
+            position: "absolute",
+            right: 0,
+          }}
+        >
           <QuantityAndPrice
             price={product.price}
             quantity={product.quantity}

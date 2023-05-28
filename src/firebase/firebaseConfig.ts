@@ -24,3 +24,8 @@ export const provider = new firebase.auth.GoogleAuthProvider();
 export const FieldValue = firebase.firestore.FieldValue;
 export const Timestamp = firebase.firestore.Timestamp.now();
 export const timestamp = firebase.firestore.Timestamp;
+export type FirebaseUser = firebase.User;
+
+provider.setCustomParameters({
+  login_hint: "user@example.com",
+});

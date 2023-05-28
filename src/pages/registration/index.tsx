@@ -1,21 +1,20 @@
+import { useRef, useState, useEffect } from "react";
 import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
 import {
   Alert,
   Button,
   FormControl,
-  FormHelperText,
-  Input,
-  InputLabel,
   TextField,
   Typography,
 } from "@mui/material";
-import { useRef, useState } from "react";
+import { createNewUser } from "../../firebase/functions/signInWithGoogle";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase/firebaseConfig";
 
 export default function Register() {
-  const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+  const currUserId = auth.currentUser?.uid;
   const [error, setError] = useState<string | null>(null);
-
   const details = useRef({
     fname: "",
     lname: "",
@@ -24,18 +23,24 @@ export default function Register() {
     country: "Estonia",
     postalCode: "",
   });
-  const handleNext = () => {
+
+  const handleClick = () => {
     const values = Object.values(details.current);
     if (values.some((value) => value === "")) {
-      console.log(details.current);
-
       setError("All Field Required");
       return;
     } else {
       setError(null);
-      setPage((prevState) => prevState + 1);
+      createNewUser(details.current);
     }
   };
+
+  useEffect(() => {
+    if (currUserId) {
+      navigate(-1);
+    }
+  }, [currUserId, navigate]);
+
   return (
     <Container
       maxWidth="lg"
@@ -66,55 +71,43 @@ export default function Register() {
         >
           Create Account
         </Typography>
-        {page === 1 && (
-          <>
-            <CustomTextField
-              onChange={(e: any) => (details.current.fname = e.target.value)}
-              label="First name"
-              type="text"
-            />
-            <CustomTextField
-              onChange={(e: any) => (details.current.lname = e.target.value)}
-              label="Last name"
-              type="text"
-            />
-            <CustomTextField
-              onChange={(e: any) => (details.current.address = e.target.value)}
-              label="Address"
-              type="text"
-            />
-            <CustomTextField
-              onChange={(e: any) => (details.current.city = e.target.value)}
-              label="City"
-              type="text"
-            />
-            <CustomTextField
-              onChange={(e: any) => (details.current.country = e.target.value)}
-              label="Country"
-              type="text"
-            />
-            <CustomTextField
-              onChange={(e: any) =>
-                (details.current.postalCode = e.target.value)
-              }
-              label="Postal code"
-              type="text"
-            />
-          </>
-        )}
-        {page === 2 && (
-          <>
-            <CustomTextField label="Phone number" type="tel" />
-          </>
-        )}
-        {page === 3 && (
-          <>
-            <CustomTextField label="Enter Code" type="number" />
-          </>
-        )}
+
+        <>
+          <CustomTextField
+            onChange={(e: any) => (details.current.fname = e.target.value)}
+            label="First name"
+            type="text"
+          />
+          <CustomTextField
+            onChange={(e: any) => (details.current.lname = e.target.value)}
+            label="Last name"
+            type="text"
+          />
+          <CustomTextField
+            onChange={(e: any) => (details.current.address = e.target.value)}
+            label="Address"
+            type="text"
+          />
+          <CustomTextField
+            onChange={(e: any) => (details.current.city = e.target.value)}
+            label="City"
+            type="text"
+          />
+          <CustomTextField
+            onChange={(e: any) => (details.current.country = e.target.value)}
+            label="Country"
+            type="text"
+          />
+          <CustomTextField
+            onChange={(e: any) => (details.current.postalCode = e.target.value)}
+            label="Postal code"
+            type="text"
+          />
+        </>
+
         {error && <Alert severity="error">{error}!</Alert>}
         <Button
-          onClick={handleNext}
+          onClick={handleClick}
           sx={{
             px: 5,
           }}
@@ -140,7 +133,7 @@ function CustomTextField(props: any) {
       }}
       {...props}
       required
-      variant="filled"
+      variant="outlined"
     />
   );
 }

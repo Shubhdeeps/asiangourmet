@@ -3,9 +3,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { cartProducts } from "../../store";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 export default function CartTotal() {
   const cartItems = cartProducts.value;
   const [cartTotal, setCartTotal] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let total = 0;
@@ -40,6 +42,7 @@ export default function CartTotal() {
         Total: €{(Math.round(cartTotal * 100) / 100).toFixed(2)}
       </Typography>
       <Button
+        onClick={() => navigate("/checkout")}
         disabled={cartTotal === 0}
         size="small"
         color="info"

@@ -6,7 +6,6 @@ import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Cart from "../header/Cart";
 import { cartProducts } from "../../store";
-import { blurrySvg } from "./blurSvg";
 import { Divider } from "@material-ui/core";
 import CartItem from "./CartItem";
 import Typography from "@mui/material/Typography";
@@ -100,29 +99,23 @@ export default function SwipeableEdgeDrawer(props: Props) {
               <Box
                 sx={{
                   width: 62,
-
                   height: 50,
-                  background: "#FFFFFF",
+                  // background: "#FFFFFF",
                   borderRadius: "20px 0px 0px 20px",
                   position: "absolute",
-                  top: "calc(15% - 15px)",
-                  right: -1,
+                  top: {
+                    xs: "3px",
+                    sm: "6.5px",
+                    md: "10px",
+                  },
+                  right: {
+                    xs: 4.5,
+                    sm: 12.5,
+                  },
                   zIndex: 1,
                 }}
               >
                 <Cart setOpen={() => setOpen(true)} />
-              </Box>
-              <Box
-                sx={{
-                  width: 100,
-                  height: 120,
-                  position: "absolute",
-                  zIndex: 0,
-                  top: "calc(13% - 15px)",
-                  right: 0,
-                }}
-              >
-                {blurrySvg}
               </Box>
             </>
           )}

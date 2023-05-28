@@ -57,13 +57,6 @@ export default function Category() {
   return (
     <>
       <Container maxWidth="xl">
-        {/* {singleProduct && (
-          <ProductPopup
-            open={!!singleProduct}
-            product={singleProduct}
-            onClose={handleClose}
-          />
-        )} */}
         <Box
           sx={{
             my: 2,
@@ -83,10 +76,7 @@ export default function Category() {
         <Box
           sx={{
             width: "100%",
-            mb: {
-              sm: "30px",
-              xs: "120px",
-            },
+            mb: "150px",
             display: "grid",
             gridTemplateColumns: {
               sm: "repeat(auto-fill, 270px)",

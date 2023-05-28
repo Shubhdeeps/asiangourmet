@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Tooltip from "@mui/material/Tooltip";
 import CustomDrawer from "./Drawer";
 import { HideOnScroll } from "./HideHeader";
 import HeaderTabs from "./HeaderTabs";
 import Cart from "./Cart";
 import CartDrawer from "../cart/CartDrawer";
 import logo from "../../assets/images/logo.png";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { UserDetails } from "../../models/UserDetails.model";
+import { getCurrUserProfile } from "../../firebase/functions/getCurrUserProfile";
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [currUser, setCurrUser] = useState<UserDetails | null>(null);
   const [showCart, setShowCart] = useState(false);
-
+  const navigate = useNavigate();
   const details = navigator.userAgent;
   const regexp = /android|iphone|kindle|ipad/i;
   const isMobileDevice = regexp.test(details);
@@ -29,6 +32,18 @@ function Header() {
     setAnchorElNav(null);
   };
   const innerWidth = window.innerWidth;
+  useEffect(() => {
+    (async () => {
+      try {
+        const user = await getCurrUserProfile();
+        setCurrUser(user);
+      } catch (e: any) {
+        if (e.message === "ERROR, USER NOT FOUND!") {
+          console.log("User is not logged in");
+        }
+      }
+    })();
+  }, []);
 
   return (
     <>
@@ -75,10 +90,23 @@ function Header() {
                 <img width="100%" height="100%" src={logo} />
               </Box>
               <HeaderTabs />
-              <Tooltip title="Profile">
-                <Avatar>H</Avatar>
-              </Tooltip>
-              {!isMobileDevice && <Cart setOpen={() => setShowCart(true)} />}
+              {!currUser && (
+                <Button
+                  onClick={() => navigate("/register")}
+                  variant="outlined"
+                >
+                  Login
+                </Button>
+              )}
+              <Box
+                onClick={() => setShowCart(true)}
+                sx={{
+                  width: "40px",
+                  height: "50px",
+                }}
+              >
+                {!isMobileDevice && <Cart setOpen={() => setShowCart(true)} />}
+              </Box>
             </Toolbar>
           </Container>
         </AppBar>
