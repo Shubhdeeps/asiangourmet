@@ -42,9 +42,7 @@ export default function MobileAddToCartButton({
           onClick={(e) => handleAddtoCart(e, "ADD")}
         >
           <AddShoppingCartIcon
-            sx={{
-              color: "secondary.main",
-            }}
+            color={isOutOfStock ? "disabled" : "secondary"}
             fontSize="small"
           />
         </IconButton>
