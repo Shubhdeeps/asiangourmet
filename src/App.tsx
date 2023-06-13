@@ -12,10 +12,10 @@ function App() {
   //init store
   initDB();
   useEffect(() => {
-    const siteId = 3520641;
-    const hotjarVersion = 6;
+    // const siteId = 3520641;
+    // const hotjarVersion = 6;
 
-    hotjar.initialize(siteId, hotjarVersion);
+    // hotjar.initialize(siteId, hotjarVersion);
     (async () => {
       await getProductsAndUpdateToDb();
     })();

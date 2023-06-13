@@ -1,3 +1,4 @@
+import React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { numberTo2DigitDecimal } from "../../../utils/priceTo2DigitDecimal";
@@ -24,6 +25,7 @@ export default function QuantityAndPrice({
       }}
     >
       <Box
+        data-testid="quantity-value"
         sx={{
           fontWeight: 700,
           fontSize: { md: "14px", xs: "9px" },

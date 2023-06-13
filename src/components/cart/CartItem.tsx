@@ -1,11 +1,13 @@
+import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import { CounterButtons } from "../products/components/CounterButton";
+
 import { CartProduct } from "../../models/CartProduct.model";
-import { addProductToCart } from "../../utils/addProductToTheCart";
+// import { addProductToCart } from "../../utils/addProductToTheCart";
 import QuantityAndPrice from "../products/components/QuantityAndPrice";
-import noimage from "../../assets/images/noimage.jpg";
+// import noimage from "../../assets/images/noimage.jpg";
 export default function CartItem({ product }: { product: CartProduct }) {
   const [counter, setCounter] = useState(product.count);
 
@@ -19,7 +21,7 @@ export default function CartItem({ product }: { product: CartProduct }) {
   ) => {
     //prevent click to parent element
     e.stopPropagation();
-    addProductToCart(product, action);
+    // addProductToCart(product, action);
 
     if (action === "ADD") {
       setCounter((prevState) => prevState + 1);
@@ -68,7 +70,7 @@ export default function CartItem({ product }: { product: CartProduct }) {
             className="border-r2"
             height="100%"
             width="100%"
-            src={product.imageURL || noimage}
+            src={product.imageURL}
           />
         </Box>
         <Box

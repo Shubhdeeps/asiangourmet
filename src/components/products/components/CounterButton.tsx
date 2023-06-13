@@ -1,3 +1,4 @@
+import React from "react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Box from "@mui/material/Box";
@@ -29,7 +30,10 @@ export const CounterButtons = ({
         flexDirection: variant,
       }}
     >
-      <IconButton onClick={(e) => handleAddtoCart(e, "REMOVE")}>
+      <IconButton
+        data-testid="remove-button"
+        onClick={(e) => handleAddtoCart(e, "REMOVE")}
+      >
         {count === 1 ? (
           <DeleteIcon
             sx={{
@@ -49,6 +53,7 @@ export const CounterButtons = ({
         )}
       </IconButton>
       <Typography
+        data-testid="counter-value"
         sx={{
           fontSize: {
             xs: "12px",
@@ -58,7 +63,10 @@ export const CounterButtons = ({
       >
         {count}
       </Typography>
-      <IconButton onClick={(e) => handleAddtoCart(e, "ADD")}>
+      <IconButton
+        data-testid="add-button"
+        onClick={(e) => handleAddtoCart(e, "ADD")}
+      >
         <AddIcon
           sx={{
             fontSize: "medium",
