@@ -19,10 +19,13 @@ describe("App integration tests", () => {
 
     const addButton = getByTestId("add-button");
     fireEvent.click(addButton);
+    fireEvent.click(addButton);
+    fireEvent.click(addButton);
+    fireEvent.click(addButton);
 
     const result = getByTestId("counter-value");
     expect(result).toBeInTheDocument();
-    expect(result.innerHTML).toEqual(`${testProduct.count + 1}`);
+    expect(result.innerHTML).toEqual(`${testProduct.count + 4}`);
   });
 });
 

@@ -14,10 +14,12 @@ export default function TopCategories() {
         alignItems="center"
         gap={{ md: "70px", xs: "10px" }}
         sx={{
-          flexDirection: {
-            md: "row",
-            xs: "column",
-          },
+          // flexDirection: {
+          //   md: "row",
+          //   xs: "column",
+          // },
+          flexWrap: "wrap",
+          justifyContent: "center",
         }}
       >
         <Category

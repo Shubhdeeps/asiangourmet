@@ -24,22 +24,29 @@ export default function HotSelling() {
       <Heading title="Hot Selling Products" />
       <Box
         sx={{
-          width: "100%",
+          boxSizing: "border-box",
+          width: "fit-content",
           mb: {
             sm: "30px",
             xs: "120px",
           },
-          display: "inline-grid",
-          gridTemplateColumns: {
-            sm: "repeat(auto-fill, 260px)",
-            xs: "repeat(auto-fill, 130px)",
-          },
-          gridGap: {
-            sm: "1rem",
-            xs: "0.2rem",
-          },
+          display: "flex",
+          gap: 2,
+          flexWrap: "wrap",
+          // gridTemplateColumns: {
+          //   sm: "repeat(auto-fill, 260px)",
+          //   xs: "repeat(auto-fill, 130px)",
+          // },
+          // gridGap: {
+          //   sm: "1rem",
+          //   xs: "0.2rem",
+          // },
           justifyContent: "center",
-          mt: 5,
+          alignItems: "center",
+          mt: {
+            xs: 0,
+            md: 5,
+          },
         }}
       >
         {hotProduct.map((product) => {

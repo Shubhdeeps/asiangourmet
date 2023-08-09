@@ -8,14 +8,14 @@ export const tabs = {
 
 export const NAVIGATION = {
   0: "/home",
-  1: "/products/hot",
+  1: "/products",
   2: "/hotthisweek",
   3: "/aboutus",
 };
 
 export const pages = [
   { path: "/home", value: "Home" },
-  { path: "/products/hot", value: "Products" },
+  { path: "/products", value: "Products" },
   { path: "/hotthisweek", value: "Popular this week" },
   { path: "/aboutus", value: "About us" },
 ];

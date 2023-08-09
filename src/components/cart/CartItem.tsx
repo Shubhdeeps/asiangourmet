@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { CounterButtons } from "../products/components/CounterButton";
 
 import { CartProduct } from "../../models/CartProduct.model";
-// import { addProductToCart } from "../../utils/addProductToTheCart";
+import { addProductToCart } from "../../utils/addProductToTheCart";
 import QuantityAndPrice from "../products/components/QuantityAndPrice";
 // import noimage from "../../assets/images/noimage.jpg";
 export default function CartItem({ product }: { product: CartProduct }) {
@@ -21,7 +21,7 @@ export default function CartItem({ product }: { product: CartProduct }) {
   ) => {
     //prevent click to parent element
     e.stopPropagation();
-    // addProductToCart(product, action);
+    addProductToCart(product, action);
 
     if (action === "ADD") {
       setCounter((prevState) => prevState + 1);

@@ -1,6 +1,6 @@
 import { CartProduct } from "../models/CartProduct.model";
 import { Product } from "../models/Product.model";
-// import { addItemsToCart, removeItemFromCart } from "../services/cartServices";
+import { addItemsToCart, removeItemFromCart } from "../services/cartServices";
 import { cartProducts } from "../store";
 
 export function addProductToCart(product: Product, action: "ADD" | "REMOVE") {
@@ -51,9 +51,9 @@ export function addProductToCart(product: Product, action: "ADD" | "REMOVE") {
       }
     }
   }
-  // removeItemFromCart(id);
+  removeItemFromCart(id);
 
   if (updatedProduct) {
-    // addItemsToCart(updatedProduct);
+    addItemsToCart(updatedProduct);
   }
 }

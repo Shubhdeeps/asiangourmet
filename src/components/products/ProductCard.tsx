@@ -11,6 +11,7 @@ import { calculateDiscountPercentage } from "../../utils/calculateDiscountPercen
 import MotionWrapper from "./components/MotionWrapper";
 function ProductCard({ props }: { props: Product }) {
   const { name, imageURL, price, quantity, quantityType, id, category } = props;
+
   const currProduct = cartProducts.value.find((item) => item.id === id);
   const navigate = useNavigate();
   const discountedPrice = calculateDiscountPercentage(price, props.discount);
@@ -69,7 +70,7 @@ function ProductCard({ props }: { props: Product }) {
           <img
             width="100%"
             height="100%"
-            src={imageURL ? imageURL : noimage}
+            src={!imageURL ? noimage : imageURL}
             className="border-r"
           />
           <Chip
