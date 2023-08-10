@@ -9,4 +9,5 @@ export interface Product {
   discount?: number;
   outOfStock?: boolean;
   popular?: boolean;
+  description?: string;
 }

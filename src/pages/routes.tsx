@@ -5,6 +5,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import Spinner from "../components/spinner";
 import AboutUs from "./aboutus";
 import Register from "./registration";
+import Page404 from "./error/Page404";
 const Dashboard = lazy(() => import("./dashboard"));
 const Category = lazy(() => import("./products/[Category]"));
 const SingleProduct = lazy(() => import("./products/singleProduct"));
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <Page404 />,
     children: [
       {
         path: "/",
@@ -70,32 +72,32 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-    ],
-  },
-  {
-    path: "/checkout",
-    element: (
-      <Suspense fallback={<Spinner />}>
-        <Checkout />,
-      </Suspense>
-    ),
-  },
-  {
-    path: "/confirm-order",
-    element: <ProtectedRoutes />,
-    children: [
       {
-        path: "/confirm-order",
+        path: "/checkout",
         element: (
           <Suspense fallback={<Spinner />}>
-            <ConfirmOrder />,
+            <Checkout />,
           </Suspense>
         ),
       },
+      {
+        path: "/confirm-order",
+        element: <ProtectedRoutes />,
+        children: [
+          {
+            path: "/confirm-order",
+            element: (
+              <Suspense fallback={<Spinner />}>
+                <ConfirmOrder />,
+              </Suspense>
+            ),
+          },
+        ],
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
     ],
-  },
-  {
-    path: "/register",
-    element: <Register />,
   },
 ]);

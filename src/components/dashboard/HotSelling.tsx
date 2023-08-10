@@ -7,6 +7,7 @@ import ProductCard from "../products/ProductCard";
 import { Product } from "../../models/Product.model";
 import MobileCard from "../products/MobileCard";
 import { getProductBasedOnName } from "../../services/productServices";
+import LoaderScreen from "../loader/LoaderScreen";
 
 const hotSellingNames = ["Dragon Fruit", "Mangosteen", "Okra", "Pepino Melon"];
 export default function HotSelling() {
@@ -14,11 +15,15 @@ export default function HotSelling() {
   useEffect(() => {
     for (const product of hotSellingNames) {
       getProductBasedOnName(product, (product) => {
-        setHotProducts((prevProducts) => [...prevProducts, product]);
+        if (product) {
+          setHotProducts((prevProducts) => [...prevProducts, product]);
+        }
       });
     }
   }, []);
-
+  if (!hotProduct.length) {
+    return <LoaderScreen />;
+  }
   return (
     <WaveContainer>
       <Heading title="Hot Selling Products" />

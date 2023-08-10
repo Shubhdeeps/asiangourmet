@@ -27,7 +27,16 @@ export default function SearchBar() {
       sx={{ width: "100%", maxWidth: "700px" }}
       onChange={(_e, val) => handleNavigate(val as Product)}
       renderInput={(params) => {
-        return <TextField {...params} color="secondary" label="Search" />;
+        return (
+          <TextField
+            {...params}
+            color="secondary"
+            sx={{
+              background: "#F7F7F7",
+            }}
+            label="Search"
+          />
+        );
       }}
     />
   );

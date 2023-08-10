@@ -41,7 +41,6 @@ export default function Category() {
     if (!products.length) {
       setTimeout(() => {
         setReRender(true);
-        console.log("re-render");
       }, 500);
     }
   }, [products.length]);

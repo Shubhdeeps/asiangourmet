@@ -58,7 +58,7 @@ export default function MobileCard({ props }: { props: Product }) {
           className="glass"
           flexDirection="column"
           gap="5px"
-          border="1px solid #F7F7F7"
+          border="1px solid #DFDFDF"
           sx={{
             height: {
               md: "380px",
@@ -66,8 +66,10 @@ export default function MobileCard({ props }: { props: Product }) {
             },
             width: {
               md: "260px",
-              xs: "130px",
+              xs: "140px",
             },
+            px: "auto",
+            borderRadius: "5px",
           }}
         >
           <Box width="100%" height="55%">
@@ -92,6 +94,7 @@ export default function MobileCard({ props }: { props: Product }) {
             <img
               width="100%"
               height="100%"
+              className="borderR-5"
               src={imageURL ? imageURL : noimage}
             />
           </Box>
@@ -177,7 +180,7 @@ export default function MobileCard({ props }: { props: Product }) {
             <Box
               sx={{
                 backgroundColor: isOutOfStock ? "#E4E4E4" : "secondary.light",
-                borderRadius: "15px 0px 0px 0px",
+                borderRadius: "15px 0px 4px 0px",
                 position: "absolute",
                 right: 0,
                 bottom: 0,

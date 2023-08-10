@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,18 +11,16 @@ import HeaderTabs from "./HeaderTabs";
 import Cart from "./Cart";
 import CartDrawer from "../cart/CartDrawer";
 import logo from "../../assets/images/logo.png";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { UserDetails } from "../../models/UserDetails.model";
-import { getCurrUserProfile } from "../../firebase/functions/getCurrUserProfile";
+import { cartProducts } from "../../store";
+import Slide from "@mui/material/Slide";
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [currUser, setCurrUser] = useState<UserDetails | null>(null);
+  // const [currUser, setCurrUser] = useState<UserDetails | null>(null);
   const [showCart, setShowCart] = useState(false);
-  const navigate = useNavigate();
-  const details = navigator.userAgent;
-  const regexp = /android|iphone|kindle|ipad/i;
-  const isMobileDevice = regexp.test(details);
+  // const details = navigator.userAgent;
+  // const regexp = /android|iphone|kindle|ipad/i;
+  // const isMobileDevice = regexp.test(details);
+  const cartItemsCount = cartProducts.value.length;
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -32,19 +30,20 @@ function Header() {
     setAnchorElNav(null);
   };
   const innerWidth = window.innerWidth;
-  useEffect(() => {
-    (async () => {
-      try {
-        const user = await getCurrUserProfile();
-        setCurrUser(user);
-      } catch (e: any) {
-        if (e.message === "ERROR, USER NOT FOUND!") {
-          console.log("User is not logged in");
-        }
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const user = await getCurrUserProfile();
+  //       setCurrUser(user);
+  //     } catch (e: any) {
+  //       if (e.message === "ERROR, USER NOT FOUND!") {
+  //         console.log("User is not logged in");
+  //       }
+  //     }
+  //   })();
+  // }, []);
 
+  const cartVisibility = !!cartItemsCount && !showCart;
   return (
     <>
       <CartDrawer
@@ -52,9 +51,25 @@ function Header() {
         open={showCart}
         setOpen={setShowCart}
       />
+      <Slide direction="left" in={cartVisibility} mountOnEnter unmountOnExit>
+        <Box
+          onClick={() => setShowCart(true)}
+          sx={{
+            width: "40px",
+            height: "50px",
+            position: "fixed",
+            right: 25,
+            top: 8,
+            zIndex: 5,
+          }}
+        >
+          <Cart setOpen={() => setShowCart(true)} />
+        </Box>
+      </Slide>
       <HideOnScroll>
         <AppBar
           sx={{
+            zIndex: 3,
             background: "rgba(255, 255, 255, 0.5)",
             boxShadow: "none",
             backdropFilter: "blur(5px)",
@@ -90,23 +105,12 @@ function Header() {
                 <img width="100%" height="100%" src={logo} />
               </Box>
               <HeaderTabs />
-              {!currUser && (
-                <Button
-                  onClick={() => navigate("/register")}
-                  variant="outlined"
-                >
-                  Login
-                </Button>
-              )}
               <Box
-                onClick={() => setShowCart(true)}
                 sx={{
-                  width: "40px",
+                  width: "10px",
                   height: "50px",
                 }}
-              >
-                {!isMobileDevice && <Cart setOpen={() => setShowCart(true)} />}
-              </Box>
+              ></Box>
             </Toolbar>
           </Container>
         </AppBar>

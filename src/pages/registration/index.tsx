@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import Container from "@mui/material/Container";
 import {
   Alert,
@@ -8,12 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import { createNewUser } from "../../firebase/functions/signInWithGoogle";
-import { useNavigate } from "react-router-dom";
-import { auth } from "../../firebase/firebaseConfig";
 
 export default function Register() {
-  const navigate = useNavigate();
-  const currUserId = auth.currentUser?.uid;
   const [error, setError] = useState<string | null>(null);
   const details = useRef({
     fname: "",
@@ -35,11 +31,11 @@ export default function Register() {
     }
   };
 
-  useEffect(() => {
-    if (currUserId) {
-      navigate(-1);
-    }
-  }, [currUserId, navigate]);
+  // useEffect(() => {
+  //   if (currUserId) {
+  //     navigate(-1);
+  //   }
+  // }, [currUserId, navigate]);
 
   return (
     <Container

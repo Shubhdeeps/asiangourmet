@@ -6,9 +6,15 @@ import { CounterButtons } from "../products/components/CounterButton";
 
 import { CartProduct } from "../../models/CartProduct.model";
 import { addProductToCart } from "../../utils/addProductToTheCart";
-import QuantityAndPrice from "../products/components/QuantityAndPrice";
+import { numberTo2DigitDecimal } from "../../utils/priceTo2DigitDecimal";
 // import noimage from "../../assets/images/noimage.jpg";
-export default function CartItem({ product }: { product: CartProduct }) {
+export default function CartItem({
+  product,
+  hideCounter,
+}: {
+  product: CartProduct;
+  hideCounter?: boolean;
+}) {
   const [counter, setCounter] = useState(product.count);
 
   useEffect(() => {
@@ -29,7 +35,9 @@ export default function CartItem({ product }: { product: CartProduct }) {
       setCounter((prevState) => prevState - 1);
     }
   };
-
+  const { discount, price, count } = product;
+  const finalPrize =
+    !!discount && discount !== price ? price : discount || price;
   return (
     <Box
       sx={{
@@ -38,6 +46,10 @@ export default function CartItem({ product }: { product: CartProduct }) {
         alignItems: "center",
         justifyContent: "space-between",
         mx: 2,
+        background: "#F6F6F6",
+        p: 1,
+        py: 2,
+        borderRadius: "10px",
       }}
     >
       <Box
@@ -81,44 +93,61 @@ export default function CartItem({ product }: { product: CartProduct }) {
           }}
         >
           <Typography
+            variant="caption"
             sx={{
               fontWeight: 800,
+
               fontSize: {
-                md: "22px",
-                sm: "18px",
-                xs: "10px",
+                md: "19px",
+                sm: "16px",
+                xs: "8px",
               },
             }}
           >
             {product.name}
           </Typography>
+          <Typography
+            variant="caption"
+            sx={{
+              fontWeight: 200,
+              width: "70%",
+              fontSize: {
+                md: "15px",
+                sm: "8px",
+                xs: "5px",
+              },
+            }}
+          >
+            {product.description}
+          </Typography>
+          <Typography
+            sx={{
+              fontWeight: 600,
+              fontSize: {
+                md: "22px",
+                xs: "16px",
+              },
+            }}
+          >
+            {numberTo2DigitDecimal(finalPrize * count)}
+          </Typography>
+        </Box>
+
+        {!hideCounter && (
           <Box
             sx={{
-              background: "#F5F5F5",
+              position: "absolute",
+              right: 0,
               borderRadius: "10px",
             }}
           >
             <CounterButtons
               handleAddtoCart={handleAddtoCart}
               count={counter}
-              variant={"row"}
+              variant={"column"}
             />
           </Box>
-        </Box>
-
-        <Box
-          sx={{
-            position: "absolute",
-            right: 0,
-          }}
-        >
-          <QuantityAndPrice
-            price={product.price}
-            quantity={product.quantity}
-            quantityType={product.quantityType}
-            discount={product.discount}
-          />
-        </Box>
+        )}
       </Box>
     </Box>
   );

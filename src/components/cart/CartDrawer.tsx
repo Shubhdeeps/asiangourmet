@@ -6,10 +6,11 @@ import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Cart from "../header/Cart";
 import { cartProducts } from "../../store";
-import { Divider } from "@material-ui/core";
 import CartItem from "./CartItem";
 import Typography from "@mui/material/Typography";
 import CartTotal from "./CartTotal";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const drawerBleeding = 36;
 
@@ -32,7 +33,7 @@ export default function SwipeableEdgeDrawer(props: Props) {
   const { window, innerWidth, open, setOpen } = props;
   const cartCount = cartProducts.value.length;
   const [cartItemsCount, setCartItemCount] = React.useState(cartCount);
-
+  const navigate = useNavigate();
   useEffect(() => {
     setCartItemCount(cartCount);
   }, [cartCount]);
@@ -78,7 +79,7 @@ export default function SwipeableEdgeDrawer(props: Props) {
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
         swipeAreaWidth={isMobileDevice ? drawerBleeding : 1}
-        disableSwipeToOpen={false}
+        disableSwipeToOpen={true}
         ModalProps={{
           keepMounted: true,
         }}
@@ -86,7 +87,6 @@ export default function SwipeableEdgeDrawer(props: Props) {
         <Box
           sx={{
             position: "absolute",
-            // border: "1px solid red",
             top: 0,
             bottom: 0,
             borderTopLeftRadius: 8,
@@ -94,9 +94,13 @@ export default function SwipeableEdgeDrawer(props: Props) {
             visibility: "visible",
           }}
         >
-          {isMobileDevice && !!cartItemsCount && (
+          {open && !!cartItemsCount && (
             <>
               <Box
+                onClick={() => {
+                  console.log("clickeddd inner");
+                  setOpen(false);
+                }}
                 sx={{
                   width: 62,
                   height: 50,
@@ -115,7 +119,7 @@ export default function SwipeableEdgeDrawer(props: Props) {
                   zIndex: 1,
                 }}
               >
-                <Cart setOpen={() => setOpen(true)} />
+                <Cart setOpen={() => setOpen(false)} />
               </Box>
             </>
           )}
@@ -125,11 +129,14 @@ export default function SwipeableEdgeDrawer(props: Props) {
             width: "100%",
             display: "flex",
             flexDirection: "column",
-            gap: 2,
+            gap: 1,
             alignItems: "stretch",
-            mt: 0,
+            mt: 5,
+            pt: 1.5,
             overflowY: "auto",
             position: "relative",
+            pb: 1.5,
+            background: "#ECECEC",
           }}
         >
           <CartTotal />
@@ -137,7 +144,6 @@ export default function SwipeableEdgeDrawer(props: Props) {
             return (
               <React.Fragment key={product.id}>
                 <CartItem product={product} />
-                <Divider variant="middle" />
               </React.Fragment>
             );
           })}
@@ -145,6 +151,23 @@ export default function SwipeableEdgeDrawer(props: Props) {
             <Typography sx={{ textAlign: "center" }}>Empty cart</Typography>
           )}
         </Box>
+        <Button
+          onClick={() => navigate("/checkout")}
+          disabled={!cartItemsCount}
+          sx={{
+            borderRadius: 0,
+            position: "relative",
+            width: "auto",
+            display: "block",
+            bottom: 0,
+            py: 1.5,
+            mt: "auto",
+          }}
+          variant="contained"
+          color="success"
+        >
+          Checkout
+        </Button>
       </SwipeableDrawer>
     </Root>
   );
