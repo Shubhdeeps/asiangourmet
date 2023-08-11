@@ -3,11 +3,10 @@ import WaveContainer from "./components/WaveContainer";
 import Heading from "./components/Heading";
 import Box from "@mui/material/Box";
 import { Fragment } from "react";
-import ProductCard from "../products/ProductCard";
 import { Product } from "../../models/Product.model";
-import MobileCard from "../products/MobileCard";
 import { getProductBasedOnName } from "../../services/productServices";
 import LoaderScreen from "../loader/LoaderScreen";
+import MainCard from "../products/MainCard";
 
 const hotSellingNames = ["Dragon Fruit", "Mangosteen", "Okra", "Pepino Melon"];
 export default function HotSelling() {
@@ -57,22 +56,7 @@ export default function HotSelling() {
         {hotProduct.map((product) => {
           return (
             <Fragment key={product.id}>
-              <Box
-                display={{
-                  xs: "none",
-                  sm: "flex",
-                }}
-              >
-                <ProductCard props={product} />
-              </Box>
-              <Box
-                display={{
-                  xs: "flex",
-                  sm: "none",
-                }}
-              >
-                <MobileCard props={product} />
-              </Box>
+              <MainCard product={product} />
             </Fragment>
           );
         })}

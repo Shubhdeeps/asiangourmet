@@ -15,11 +15,7 @@ import { cartProducts } from "../../store";
 import Slide from "@mui/material/Slide";
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  // const [currUser, setCurrUser] = useState<UserDetails | null>(null);
   const [showCart, setShowCart] = useState(false);
-  // const details = navigator.userAgent;
-  // const regexp = /android|iphone|kindle|ipad/i;
-  // const isMobileDevice = regexp.test(details);
   const cartItemsCount = cartProducts.value.length;
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -30,18 +26,6 @@ function Header() {
     setAnchorElNav(null);
   };
   const innerWidth = window.innerWidth;
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const user = await getCurrUserProfile();
-  //       setCurrUser(user);
-  //     } catch (e: any) {
-  //       if (e.message === "ERROR, USER NOT FOUND!") {
-  //         console.log("User is not logged in");
-  //       }
-  //     }
-  //   })();
-  // }, []);
 
   const cartVisibility = !!cartItemsCount && !showCart;
   return (
@@ -59,7 +43,11 @@ function Header() {
             height: "50px",
             position: "fixed",
             right: 25,
-            top: 8,
+            top: {
+              md: 8,
+              sm: 6,
+              xs: 3,
+            },
             zIndex: 5,
           }}
         >

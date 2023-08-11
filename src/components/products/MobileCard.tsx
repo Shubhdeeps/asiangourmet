@@ -6,12 +6,12 @@ import noimage from "../../assets/images/noimage.jpg";
 import { Product } from "../../models/Product.model";
 import { cartProducts } from "../../store";
 import { useEffect, useState } from "react";
-import MobileAddToCartButton from "./components/MobileAddToCartButton";
 import { useNavigate } from "react-router-dom";
 import { calculateDiscountPercentage } from "../../utils/calculateDiscountPercentage";
 import Chip from "@mui/material/Chip";
 import { numberTo2DigitDecimal } from "../../utils/priceTo2DigitDecimal";
 import MotionWrapper from "./components/MotionWrapper";
+import AddToCartButton from "./components/AddToCartButton";
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -46,11 +46,13 @@ export default function MobileCard({ props }: { props: Product }) {
   const handleNavigate = () => {
     navigate(`/products/${category}/product?name=${encodeURI(name)}`);
   };
+
   useEffect(() => {
     setItemCount(currProduct ? currProduct.count : 0);
   }, [currProduct]);
+
   return (
-    <MotionWrapper>
+    <MotionWrapper itemCount={itemCount}>
       <StyledBadge badgeContent={itemCount} color="success">
         <Box
           onClick={handleNavigate}
@@ -60,16 +62,31 @@ export default function MobileCard({ props }: { props: Product }) {
           gap="5px"
           border="1px solid #DFDFDF"
           sx={{
-            height: {
-              md: "380px",
-              xs: "180px",
+            height: "180px",
+            width: "170px",
+            "@media (max-width: 552px)": {
+              width: "160px",
             },
-            width: {
-              md: "260px",
-              xs: "140px",
+            "@media (max-width: 528px)": {
+              width: "140px",
+            },
+            "@media (max-width: 468px)": {
+              width: "170px",
+            },
+            "@media (max-width: 380px)": {
+              width: "160px",
+            },
+            "@media (max-width: 368px)": {
+              width: "150px",
+            },
+            "@media (max-width: 348px)": {
+              width: "140px",
+            },
+            "@media (max-width: 328px)": {
+              width: "170px",
             },
             px: "auto",
-            borderRadius: "5px",
+            borderRadius: "10px",
           }}
         >
           <Box width="100%" height="55%">
@@ -94,7 +111,7 @@ export default function MobileCard({ props }: { props: Product }) {
             <img
               width="100%"
               height="100%"
-              className="borderR-5"
+              className="border-r"
               src={imageURL ? imageURL : noimage}
             />
           </Box>
@@ -180,13 +197,20 @@ export default function MobileCard({ props }: { props: Product }) {
             <Box
               sx={{
                 backgroundColor: isOutOfStock ? "#E4E4E4" : "secondary.light",
-                borderRadius: "15px 0px 4px 0px",
+                border: "1px solid #C7E5E9",
+                borderRadius: "10px 0px 9px 0px",
+                width: "37px",
                 position: "absolute",
-                right: 0,
-                bottom: 0,
+                right: -1,
+                bottom: -1,
+                transform: "all .5s linear",
               }}
             >
-              <MobileAddToCartButton product={props} initCount={itemCount} />
+              <AddToCartButton
+                hideCounter
+                product={props}
+                initCount={itemCount}
+              />
             </Box>
           </Box>
         </Box>

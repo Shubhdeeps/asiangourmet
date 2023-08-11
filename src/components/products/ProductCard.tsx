@@ -29,7 +29,7 @@ function ProductCard({ props }: { props: Product }) {
     navigate(`/products/${category}/product?name=${encodeURI(name)}`);
   };
   return (
-    <MotionWrapper>
+    <MotionWrapper itemCount={itemCount}>
       <Box
         onClick={handleNavigate}
         display="flex"
@@ -102,13 +102,29 @@ function ProductCard({ props }: { props: Product }) {
         >
           <Box
             sx={{
+              backgroundColor: isOutOfStock ? "#E4E4E4" : "secondary.light",
+              border: "1px solid #C7E5E9",
+              borderRadius: "0px 10px 0px 10px",
+              minHeight: "45px",
+              width: "45px",
+              position: "absolute",
+              left: -1,
+              bottom: -1,
+              transform: "all .5s linear",
               display: "flex",
-              gap: "4px",
+              justifyContent: "center",
               alignItems: "center",
             }}
           >
             <AddToCartButton product={props} initCount={itemCount} />
           </Box>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "4px",
+              alignItems: "center",
+            }}
+          ></Box>
           {isOutOfStock ? (
             <Chip
               sx={{

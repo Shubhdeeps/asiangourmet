@@ -10,6 +10,7 @@ export const CounterButtons = ({
   variant,
   handleAddtoCart,
   count,
+  hideCounter,
 }: {
   variant: "row" | "column" | "column-reverse";
   handleAddtoCart: (
@@ -17,6 +18,7 @@ export const CounterButtons = ({
     action: "ADD" | "REMOVE"
   ) => void;
   count: number;
+  hideCounter?: boolean;
 }) => {
   return (
     <Box
@@ -52,17 +54,20 @@ export const CounterButtons = ({
           />
         )}
       </IconButton>
-      <Typography
-        data-testid="counter-value"
-        sx={{
-          fontSize: {
-            xs: "12px",
-            md: "16px",
-          },
-        }}
-      >
-        {count}
-      </Typography>
+      {!hideCounter && (
+        <Typography
+          data-testid="counter-value"
+          sx={{
+            fontWeight: 600,
+            fontSize: {
+              xs: "12px",
+              md: "16px",
+            },
+          }}
+        >
+          {count}
+        </Typography>
+      )}
       <IconButton
         data-testid="add-button"
         onClick={(e) => handleAddtoCart(e, "ADD")}

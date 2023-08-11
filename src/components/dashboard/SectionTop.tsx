@@ -4,31 +4,45 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-
+import Stack from "@mui/material/Stack";
 export default function SectionTop() {
   const navigate = useNavigate();
   const handleProductMenu = () => navigate("/products/hot");
   return (
-    <Box
-      display="flex"
-      justifyContent="space-between"
+    <Stack
+      direction={{
+        xs: "column-reverse",
+        lg: "row",
+      }}
+      justifyContent={{
+        md: "space-between",
+      }}
       alignItems="center"
       sx={{
-        flexDirection: {
-          xs: "column-reverse",
-          sm: "column-reverse",
-          md: "row",
-        },
+        border: "1px solid red",
       }}
+      // justifyContent="space-between"
+      // sx={{
+      //   display: "flex",
+      //   alignItems: "center",
+      //   flexDirection: {
+      //     xs: "column-reverse",
+      //     md: "row",
+      //   },
+      // }}
     >
       <Box
         sx={{
+          border: "1px solid black",
           width: { sm: "100%", md: "40%" },
+          minWidth: {
+            md: "500px",
+            lg: "700px",
+          },
           display: "flex",
           flexDirection: "column",
           alignItems: {
             xs: "center",
-            sm: "center",
             md: "start",
           },
           gap: "30px",
@@ -108,15 +122,21 @@ export default function SectionTop() {
       </Box>
       <Box
         sx={{
+          border: "1px solid red",
           width: {
             xs: "110%",
-            sm: "76%",
-            md: "60%",
+            sm: "60%",
+            md: "50%",
+          },
+          maxWidth: "800px",
+          mt: {
+            md: 0,
+            xs: -8,
           },
         }}
       >
         <img src={dash1} width="100%" />
       </Box>
-    </Box>
+    </Stack>
   );
 }

@@ -1,5 +1,6 @@
 import { motion, Variants } from "framer-motion";
-
+import Box from "@mui/material/Box";
+import { useState, useEffect } from "react";
 const cardVariants: Variants = {
   offscreen: {
     y: 100,
@@ -18,19 +19,42 @@ const cardVariants: Variants = {
 
 type Props = {
   children: React.ReactNode;
+  itemCount: number;
 };
 
-export default function MotionWrapper({ children }: Props) {
+export default function MotionWrapper({ children, itemCount }: Props) {
+  const [grow, setGrow] = useState(itemCount);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setGrow(itemCount);
+      // setGrow(false);
+    }, 140);
+    return () => clearTimeout(timer);
+  }, [itemCount]);
+
   return (
     <motion.div
       className="box noselect"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0 }}
-      // transition={{ type: "keyframes", stiffness: 400, damping: 10 }}
       variants={cardVariants}
     >
-      {children}
+      <Box
+        sx={{
+          transition: "all .2s ease-in-out",
+          transform: `${
+            grow === itemCount
+              ? "scale(1)"
+              : grow > itemCount
+              ? "scale(0.97);"
+              : "scale(1.03)"
+          }`,
+        }}
+      >
+        {children}
+      </Box>
     </motion.div>
   );
 }

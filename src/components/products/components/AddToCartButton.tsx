@@ -10,9 +10,11 @@ import { addProductToCart } from "../../../utils/addProductToTheCart";
 export default function AddToCartButton({
   product,
   initCount,
+  hideCounter,
 }: {
   product: Product;
   initCount: number;
+  hideCounter?: boolean;
 }) {
   const [counter, setCounter] = useState(initCount);
 
@@ -60,16 +62,20 @@ export default function AddToCartButton({
           onClick={(e) => handleAddtoCart(e, "ADD")}
         >
           <AddShoppingCartIcon
-            color={isOutOfStock ? "disabled" : "success"}
-            fontSize="medium"
+            color={isOutOfStock ? "disabled" : "secondary"}
+            fontSize="small"
           />
         </IconButton>
       ) : (
-        <CounterButtons
-          handleAddtoCart={handleAddtoCart}
-          count={counter}
-          variant="row"
-        />
+        <>
+          <CounterButtons
+            count={counter}
+            hideCounter={hideCounter}
+            handleAddtoCart={handleAddtoCart}
+            variant="column-reverse"
+          />
+          {/* <MobileCounterButtons handleAddtoCart={handleAddtoCart} /> */}
+        </>
       )}
     </>
   );

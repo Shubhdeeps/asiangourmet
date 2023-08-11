@@ -14,31 +14,6 @@ export default function FloatingTabs() {
   const navigation = useNavigate();
   const [value, setValue] = useState(indexOfCurrentCategory);
 
-  const StyledTabs = styled((props: any) => (
-    <Tabs
-      sx={{
-        color: "#F4B83B",
-      }}
-      {...props}
-      TabIndicatorProps={{
-        children: <span className="MuiTabs-indicatorSpan" />,
-      }}
-    />
-  ))({
-    "& .MuiTabs-indicator": {
-      display: "flex",
-      justifyContent: "center",
-      backgroundColor: "transparent",
-      height: 4,
-    },
-    "& .MuiTabs-indicatorSpan": {
-      borderRadius: "3px",
-      maxWidth: 30,
-      width: "100%",
-      backgroundColor: "#F4B83B",
-    },
-  });
-
   interface StyledTabProps {
     label: string;
   }
@@ -69,7 +44,7 @@ export default function FloatingTabs() {
         width: "100%",
         height: {
           md: "90px",
-          xs: "70px",
+          xs: "55px",
         },
         position: {
           xs: "fixed",
@@ -93,13 +68,14 @@ export default function FloatingTabs() {
           background: "#363636",
           borderRadius: {
             md: "15px",
-            xs: "30% 30% 0px 0px",
+            xs: "20% 20% 0px 0px",
           },
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
           overflow: "none",
+          pb: 0.5,
         }}
       >
         <Box
@@ -115,21 +91,39 @@ export default function FloatingTabs() {
             position: "absolute",
             right: "-38px",
             transform: "rotate(180deg)",
-            display: {
-              sm: "flex",
-              xs: "none",
+            display: "flex",
+            "@media (max-width: 360px)": {
+              display: "none",
             },
           }}
         >
           {bgFlower}
         </Box>
-        <StyledTabs
+        <Tabs
+          TabIndicatorProps={{
+            children: <span className="MuiTabs-indicatorSpan" />,
+          }}
+          sx={{
+            color: "#F4B83B",
+            "& .MuiTabs-indicator": {
+              display: "flex",
+              justifyContent: "center",
+              backgroundColor: "transparent",
+              height: 4,
+            },
+            "& .MuiTabs-indicatorSpan": {
+              borderRadius: "3px",
+              maxWidth: 30,
+              width: "100%",
+              backgroundColor: "#F4B83B",
+            },
+          }}
           value={value}
           onChange={handleChange}
           variant="scrollable"
           scrollButtons
           allowScrollButtonsMobile
-          aria-label="styled tabs example"
+          aria-label="scrollable auto tabs"
         >
           {categories.map((element) => {
             return (
@@ -142,7 +136,7 @@ export default function FloatingTabs() {
               />
             );
           })}
-        </StyledTabs>
+        </Tabs>
       </Box>
     </Box>
   );

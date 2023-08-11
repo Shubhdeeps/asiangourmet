@@ -152,7 +152,10 @@ export default function SwipeableEdgeDrawer(props: Props) {
           )}
         </Box>
         <Button
-          onClick={() => navigate("/checkout")}
+          onClick={() => {
+            setOpen(false);
+            navigate("/checkout");
+          }}
           disabled={!cartItemsCount}
           sx={{
             borderRadius: 0,

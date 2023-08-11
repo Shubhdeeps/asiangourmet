@@ -10,6 +10,7 @@ import { Product } from "../../models/Product.model";
 import SearchBar from "../../components/search/SearchBar";
 import Spinner from "../../components/spinner";
 import MobileCard from "../../components/products/MobileCard";
+import MainCard from "../../components/products/MainCard";
 
 export default function Category() {
   const { category } = useParams();
@@ -26,7 +27,7 @@ export default function Category() {
       const scrollYOfNewCategory = scrollPositionRef.current[category]
         ? scrollPositionRef.current[category]
         : 0;
-      window.scrollTo(0, scrollYOfNewCategory);
+      window.scrollTo({ top: scrollYOfNewCategory, behavior: "smooth" });
     }
 
     return () => {
@@ -76,37 +77,25 @@ export default function Category() {
           sx={{
             width: "100%",
             mb: "150px",
-            display: "grid",
-            gridTemplateColumns: {
-              sm: "repeat(auto-fill, 270px)",
-              xs: "repeat(auto-fill, 140px)",
-            },
-            gridGap: {
-              sm: "1rem",
-              xs: "0.5rem",
-            },
+            // display: "grid",
+            // gridTemplateColumns: {
+            //   sm: "repeat(auto-fill, 270px)",
+            //   xs: "repeat(auto-fill, 140px)",
+            // },
+            // gridGap: {
+            //   sm: "1rem",
+            //   xs: "0.5rem",
+            // },
+            display: "flex",
+            gap: 1,
+            flexWrap: "wrap",
             justifyContent: "center",
           }}
         >
           {products.map((product) => {
             return (
               <Fragment key={product.id}>
-                <Box
-                  display={{
-                    xs: "none",
-                    sm: "flex",
-                  }}
-                >
-                  <ProductCard props={product} />
-                </Box>
-                <Box
-                  display={{
-                    xs: "flex",
-                    sm: "none",
-                  }}
-                >
-                  <MobileCard props={product} />
-                </Box>
+                <MainCard product={product} applyMediaQuery />
               </Fragment>
             );
           })}

@@ -21,20 +21,16 @@ export default function Cart({ setOpen }: { setOpen: () => void }) {
   const [cartItemsCount, setCartItemCount] = useState(cartCount);
   const [grow, setGrow] = useState(false);
   useEffect(() => {
-    console.log("updating count!");
-
     setCartItemCount(cartCount);
   }, [cartCount]);
 
   useEffect(() => {
     setGrow(true);
     const timer = setTimeout(() => {
-      console.log("setting false");
       setGrow(false);
     }, 140);
     return () => clearTimeout(timer);
   }, [cartProducts.value]);
-  console.log(grow);
 
   return (
     <Tooltip title="Cart">

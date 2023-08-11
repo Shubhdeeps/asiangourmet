@@ -16,8 +16,7 @@ import BreadCrumbs from "../../../components/products/BreadCrumbs";
 import Spinner from "../../../components/spinner";
 import { Chip } from "@mui/material";
 import AddToCartButton from "../../../components/products/components/AddToCartButton";
-import ProductCard from "../../../components/products/ProductCard";
-import MobileCard from "../../../components/products/MobileCard";
+import MainCard from "../../../components/products/MainCard";
 
 export default function SingleProduct() {
   const location = useLocation();
@@ -27,6 +26,9 @@ export default function SingleProduct() {
   const cartItems = cartProducts.value;
   const [products, setProducts] = useState<Product[]>([]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [productName]);
   useEffect(() => {
     const currItem = cartItems.find((item) => item.name === productName);
     if (currItem) {
@@ -191,22 +193,7 @@ export default function SingleProduct() {
           {products.map((product) => {
             return (
               <Fragment key={product.id}>
-                <Box
-                  display={{
-                    xs: "none",
-                    sm: "flex",
-                  }}
-                >
-                  <ProductCard props={product} />
-                </Box>
-                <Box
-                  display={{
-                    xs: "flex",
-                    sm: "none",
-                  }}
-                >
-                  <MobileCard props={product} />
-                </Box>
+                <MainCard product={product} />
               </Fragment>
             );
           })}

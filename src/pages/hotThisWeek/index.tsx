@@ -1,12 +1,11 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import ProductCard from "../../components/products/ProductCard";
 import Box from "@mui/material/Box";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { getAllPopularProducts } from "../../services/productServices";
 import { Product } from "../../models/Product.model";
 import Spinner from "../../components/spinner";
-import MobileCard from "../../components/products/MobileCard";
+import MainCard from "../../components/products/MainCard";
 
 export default function HotThisWeek() {
   const [products, setProducts] = useState<Product[] | null>(null);
@@ -62,37 +61,25 @@ export default function HotThisWeek() {
               sm: "30px",
               xs: "120px",
             },
-            display: "grid",
-            gridTemplateColumns: {
-              sm: "repeat(auto-fill, 270px)",
-              xs: "repeat(auto-fill, 140px)",
-            },
-            gridGap: {
-              sm: "1rem",
-              xs: "0.5rem",
-            },
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 2,
+            // display: "grid",
+            // gridTemplateColumns: {
+            //   sm: "repeat(auto-fill, 270px)",
+            //   xs: "repeat(auto-fill, 140px)",
+            // },
+            // gridGap: {
+            //   sm: "1rem",
+            //   xs: "0.5rem",
+            // },
             justifyContent: "center",
           }}
         >
           {products.map((product) => {
             return (
               <Fragment key={product.id}>
-                <Box
-                  display={{
-                    xs: "none",
-                    sm: "flex",
-                  }}
-                >
-                  <ProductCard props={product} />
-                </Box>
-                <Box
-                  display={{
-                    xs: "flex",
-                    sm: "none",
-                  }}
-                >
-                  <MobileCard props={product} />
-                </Box>
+                <MainCard product={product} applyMediaQuery />
               </Fragment>
             );
           })}
