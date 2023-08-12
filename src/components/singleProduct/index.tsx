@@ -66,6 +66,7 @@ const ProductPopup = ({
         <Box display="flex" alignItems="center" gap={0.5}>
           {discount && discount !== price && (
             <Typography
+              variant="inherit"
               sx={{
                 fontWeight: 400,
                 fontSize: "16px",
@@ -77,6 +78,7 @@ const ProductPopup = ({
             </Typography>
           )}
           <Typography
+            variant="inherit"
             sx={{
               fontWeight: 600,
               fontSize: "22px",

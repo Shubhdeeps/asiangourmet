@@ -45,11 +45,13 @@ export default function ProductHighlighted({
         </Box>
 
         <Typography
+          variant="inherit"
           sx={{ fontSize: { sm: "22px", xs: "16px" }, fontWeight: 700 }}
         >
           {heading}
         </Typography>
         <Typography
+          variant="inherit"
           sx={{ fontSize: { sm: "14px", xs: "9px" }, fontWeight: 300 }}
         >
           {title}

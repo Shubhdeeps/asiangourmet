@@ -77,6 +77,7 @@ export default function SingleProduct() {
       >
         <span>
           <Typography
+            variant="inherit"
             sx={{
               fontWeight: 700,
               fontSize: {
@@ -88,6 +89,7 @@ export default function SingleProduct() {
             {product.name}
           </Typography>
           <Typography
+            variant="inherit"
             sx={{
               fontWeight: 300,
               mt: "-10px",
@@ -168,6 +170,7 @@ export default function SingleProduct() {
         className="glass"
       >
         <Typography
+          variant="inherit"
           sx={{
             fontSize: 22,
             fontWeight: 500,

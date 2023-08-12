@@ -125,6 +125,7 @@ export default function MobileCard({ props }: { props: Product }) {
             }}
           >
             <Typography
+              variant="inherit"
               sx={{
                 fontSize: "9px",
                 fontWeight: 700,
@@ -134,6 +135,7 @@ export default function MobileCard({ props }: { props: Product }) {
               {quantityType})
             </Typography>
             <Typography
+              variant="inherit"
               sx={{
                 fontSize: "8px",
                 fontWeight: 300,
@@ -172,6 +174,7 @@ export default function MobileCard({ props }: { props: Product }) {
               >
                 {!!discount && discount !== price && (
                   <Typography
+                    variant="inherit"
                     sx={{
                       fontWeight: 400,
                       fontSize: "9px",
@@ -185,6 +188,7 @@ export default function MobileCard({ props }: { props: Product }) {
                 )}
 
                 <Typography
+                  variant="inherit"
                   sx={{
                     fontSize: "14px",
                     fontWeight: 600,

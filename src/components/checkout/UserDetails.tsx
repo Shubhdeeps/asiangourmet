@@ -23,6 +23,7 @@ export default function UserDetails({
       }}
     >
       <Typography
+        variant="inherit"
         sx={{
           fontWeight: 700,
           fontSize: 9,
@@ -33,6 +34,7 @@ export default function UserDetails({
       </Typography>
 
       <Typography
+        variant="inherit"
         sx={{
           fontWeight: 500,
           fontSize: 19,
@@ -41,6 +43,7 @@ export default function UserDetails({
         {user.fname} {user.lname}
       </Typography>
       <Typography
+        variant="inherit"
         sx={{
           fontWeight: 300,
           fontSize: 12,

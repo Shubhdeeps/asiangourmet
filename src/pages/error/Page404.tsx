@@ -10,7 +10,7 @@ const Page404 = () => {
       <Typography variant="h4" align="center" gutterBottom>
         Page Not Found
       </Typography>
-      <Typography align="center" gutterBottom>
+      <Typography variant="inherit" align="center" gutterBottom>
         The page you are looking for might have been removed, had its name
         changed, or is temporarily unavailable.
       </Typography>

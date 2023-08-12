@@ -25,6 +25,7 @@ function App() {
       await updateUserProfileToLocalStorage();
     })();
   }, []);
+
   return (
     <>
       <SnackbarProvider maxSnack={6}>

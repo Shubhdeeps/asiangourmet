@@ -11,6 +11,7 @@ export default function BreadCrumbs({ path }: { path: string[] }) {
     if (lastItem) {
       return (
         <Typography
+          variant="inherit"
           sx={{
             textTransform: "capitalize",
           }}

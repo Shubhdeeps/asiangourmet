@@ -4,7 +4,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import { useLocation, useNavigate } from "react-router-dom";
-import { NAVIGATION, pages, tabs } from "./consts";
+import { NAVIGATION, pages, tabs } from "../consts";
 
 const tabsProxy = new Proxy(tabs, {
   get(target, prop: "", _) {
@@ -20,6 +20,7 @@ interface StyledTabsProps {
   children?: React.ReactNode;
   value: number;
   onChange: (event: React.SyntheticEvent, newValue: number) => void;
+  orientation: "vertical" | "horizontal";
 }
 
 const StyledTabs = styled((props: StyledTabsProps) => {
@@ -66,7 +67,11 @@ const StyledTab = styled((props: StyledTabProps) => {
   },
 }));
 
-export default function HeaderTabs() {
+export default function HeaderTabs({
+  orientation = "horizontal",
+}: {
+  orientation?: "vertical" | "horizontal";
+}) {
   const location = useLocation();
   const navigate = useNavigate();
   const pathname = location.pathname.split("/")[1] as "";
@@ -84,12 +89,13 @@ export default function HeaderTabs() {
     <Box
       sx={{
         flexGrow: 1,
-        display: { xs: "none", md: "flex" },
+        // display: { xs: "none", md: "flex" },
         justifyContent: "end",
         background: "transparent",
       }}
     >
       <StyledTabs
+        orientation={orientation}
         value={value}
         onChange={handleChange}
         aria-label="styled tabs example"

@@ -40,6 +40,7 @@ export default function QuantityAndPrice({
       <Box display="flex" alignItems={"center"} gap={0.5}>
         {!!discount && discount !== price && (
           <Typography
+            variant="inherit"
             sx={{
               fontWeight: 400,
               fontSize: {
@@ -54,6 +55,7 @@ export default function QuantityAndPrice({
           </Typography>
         )}
         <Typography
+          variant="inherit"
           sx={{
             fontWeight: 600,
             fontSize: {

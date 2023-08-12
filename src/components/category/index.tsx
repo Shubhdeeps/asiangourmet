@@ -54,6 +54,7 @@ export function Category({
         </Box>
       </Box>
       <Typography
+        variant="inherit"
         sx={{
           textTransform: "capitalize",
           fontWeight: 500,

@@ -42,6 +42,7 @@ export default function AboutUs() {
           }}
         >
           <Typography
+            variant="inherit"
             sx={{
               fontSize: { md: "28px", sm: "16px" },
               fontWeight: 400,

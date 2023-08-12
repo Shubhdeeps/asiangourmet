@@ -91,7 +91,7 @@ function Footer() {
           </Box>
         </Grid>
         {/* <Grid item xs={12}>
-          <Typography
+          <Typography variant="inherit"
             variant="body2"
             align="center"
             className={classes.footerText}

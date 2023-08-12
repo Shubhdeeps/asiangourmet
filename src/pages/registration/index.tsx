@@ -57,6 +57,7 @@ export default function Register() {
         }}
       >
         <Typography
+          variant="inherit"
           sx={{
             fontSize: "32px",
             fontWeight: 700,

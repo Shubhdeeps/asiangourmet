@@ -12,15 +12,13 @@ export default function SectionTop() {
     <Stack
       direction={{
         xs: "column-reverse",
-        lg: "row",
+        md: "row",
       }}
       justifyContent={{
         md: "space-between",
       }}
       alignItems="center"
-      sx={{
-        border: "1px solid red",
-      }}
+      sx={{}}
       // justifyContent="space-between"
       // sx={{
       //   display: "flex",
@@ -33,7 +31,6 @@ export default function SectionTop() {
     >
       <Box
         sx={{
-          border: "1px solid black",
           width: { sm: "100%", md: "40%" },
           minWidth: {
             md: "500px",
@@ -61,6 +58,7 @@ export default function SectionTop() {
           <img src={dashlabel} width="100%" />
         </Box>
         <Typography
+          variant="inherit"
           sx={{
             fontSize: { sm: "32px", md: "56px", xs: "22px" },
             fontWeight: 700,
@@ -91,6 +89,7 @@ export default function SectionTop() {
           }}
         >
           <Typography
+            variant="inherit"
             sx={{
               fontSize: { md: "18px", sm: "12px" },
               fontWeight: 400,
@@ -122,7 +121,6 @@ export default function SectionTop() {
       </Box>
       <Box
         sx={{
-          border: "1px solid red",
           width: {
             xs: "110%",
             sm: "60%",

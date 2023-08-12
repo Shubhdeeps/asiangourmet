@@ -148,7 +148,9 @@ export default function SwipeableEdgeDrawer(props: Props) {
             );
           })}
           {!cartItemsCount && (
-            <Typography sx={{ textAlign: "center" }}>Empty cart</Typography>
+            <Typography variant="inherit" sx={{ textAlign: "center" }}>
+              Empty cart
+            </Typography>
           )}
         </Box>
         <Button

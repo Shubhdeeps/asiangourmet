@@ -17,6 +17,7 @@ export default function CartTotalTypography() {
 
   return (
     <Typography
+      variant="inherit"
       sx={{
         fontSize: {
           xs: "18px",

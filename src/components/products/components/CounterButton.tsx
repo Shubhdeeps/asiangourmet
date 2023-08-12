@@ -56,6 +56,7 @@ export const CounterButtons = ({
       </IconButton>
       {!hideCounter && (
         <Typography
+          variant="inherit"
           data-testid="counter-value"
           sx={{
             fontWeight: 600,

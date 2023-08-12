@@ -50,6 +50,7 @@ export default function Location() {
         }}
       >
         <Typography
+          variant="inherit"
           sx={{
             fontSize: { md: "44px", xs: "28px", lg: "50px" },
             fontWeight: 700,

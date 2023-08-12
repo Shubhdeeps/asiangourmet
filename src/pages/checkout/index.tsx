@@ -36,6 +36,7 @@ export default function Checkout() {
       }}
     >
       <Typography
+        variant="inherit"
         sx={{
           fontWeight: 700,
           fontSize: 24,

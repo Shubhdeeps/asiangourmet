@@ -1,6 +1,7 @@
 import React from "react";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Slide from "@mui/material/Slide";
+import { Box } from "@mui/material";
 
 interface Props {
   /**
@@ -19,8 +20,17 @@ export function HideOnScroll(props: Props) {
   });
 
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
+    <Box
+      sx={{
+        display: {
+          xs: "none",
+          md: "flex",
+        },
+      }}
+    >
+      <Slide appear={false} direction="down" in={!trigger}>
+        {children}
+      </Slide>
+    </Box>
   );
 }

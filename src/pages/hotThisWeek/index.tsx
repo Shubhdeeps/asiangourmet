@@ -51,7 +51,7 @@ export default function HotThisWeek() {
       >
         {products.length === 0 && (
           <>
-            <Typography>No Products</Typography>
+            <Typography variant="inherit">No Products</Typography>
           </>
         )}
         <Box

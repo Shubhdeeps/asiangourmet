@@ -2,34 +2,34 @@ import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import CustomDrawer from "./Drawer";
-import { HideOnScroll } from "./HideHeader";
-import HeaderTabs from "./HeaderTabs";
+import { HideOnScroll } from "./components/HideHeader";
+import HeaderTabs from "./components/HeaderTabs";
 import Cart from "./Cart";
 import CartDrawer from "../cart/CartDrawer";
 import logo from "../../assets/images/logo.png";
 import { cartProducts } from "../../store";
 import Slide from "@mui/material/Slide";
+import CustomMenuBar from "./components/CustomMenuBar";
 function Header() {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const cartItemsCount = cartProducts.value.length;
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  const handleCloseNavMenu = (state: boolean) => {
+    console.log("closing");
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+    setOpenDrawer(state);
   };
   const innerWidth = window.innerWidth;
 
   const cartVisibility = !!cartItemsCount && !showCart;
   return (
     <>
+      <CustomMenuBar
+        mobileOpen={Boolean(openDrawer)}
+        handleDrawerToggle={handleCloseNavMenu}
+      />
       <CartDrawer
         innerWidth={innerWidth}
         open={showCart}
@@ -45,7 +45,6 @@ function Header() {
             right: 25,
             top: {
               md: 8,
-              sm: 6,
               xs: 3,
             },
             zIndex: 5,
@@ -54,6 +53,7 @@ function Header() {
           <Cart setOpen={() => setShowCart(true)} />
         </Box>
       </Slide>
+      {/* Not visible for display xs,sm */}
       <HideOnScroll>
         <AppBar
           sx={{
@@ -65,7 +65,13 @@ function Header() {
         >
           <Container maxWidth="xl">
             <Toolbar disableGutters sx={{ gap: "20px" }}>
-              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              {/* deprecate the previous mobile hamburger */}
+              {/* <Box
+                sx={{
+                  flexGrow: 1,
+                  display: { xs: "flex", md: "none" },
+                }}
+              >
                 <IconButton
                   size="large"
                   aria-label="account of current user"
@@ -76,10 +82,10 @@ function Header() {
                   <MenuIcon />
                 </IconButton>
                 <CustomDrawer
-                  mobileOpen={Boolean(anchorElNav)}
+                  mobileOpen={Boolean(openDrawer)}
                   handleDrawerToggle={handleCloseNavMenu}
                 />
-              </Box>
+              </Box> */}
               <Box
                 sx={{
                   width: "160px",

@@ -121,6 +121,7 @@ export default function CartItem({
             {product.description}
           </Typography>
           <Typography
+            variant="inherit"
             sx={{
               fontWeight: 600,
               fontSize: {

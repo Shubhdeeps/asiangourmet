@@ -29,7 +29,7 @@
 //     }
 //     // variant could be success, error, warning, info, or default
 //     const text = (
-//       <Typography>{`${product.name} added to your cart.`}</Typography>
+//       <Typography variant="inherit">{`${product.name} added to your cart.`}</Typography>
 //     );
 //     enqueueSnackbar(text, {
 //       variant: "success",
