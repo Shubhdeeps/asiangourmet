@@ -1,11 +1,8 @@
 import { bubble as Menu } from "react-burger-menu";
 import "./hamburger.css";
-import { Box, Divider, Typography, Tabs, Tab } from "@mui/material";
-import { pages } from "../consts";
+import { Box, Divider } from "@mui/material";
 import logo from "../../../assets/images/logo.png";
-import { useNavigate } from "react-router-dom";
 import svg from "./hamburgerIcon.svg";
-import { useState } from "react";
 import HeaderTabs from "./HeaderTabs";
 export default function CustomMenuBar({
   mobileOpen,
@@ -14,16 +11,6 @@ export default function CustomMenuBar({
   mobileOpen: boolean;
   handleDrawerToggle: (state: boolean) => void;
 }) {
-  function showSettings(e: { preventDefault: () => void }) {
-    e.preventDefault();
-  }
-  const navigate = useNavigate();
-  const [selectedTab, setSelectedTab] = useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setSelectedTab(newValue);
-  };
-
   const drawer = (
     <Box
       sx={{

@@ -1,5 +1,4 @@
 import Container from "@mui/material/Container";
-import ProductCard from "../../components/products/ProductCard";
 import Box from "@mui/material/Box";
 import { Fragment, useEffect, useRef, useState } from "react";
 import BreadCrumbs from "../../components/products/BreadCrumbs";
@@ -9,7 +8,6 @@ import { getDataBasedOnFilters } from "../../services/productServices";
 import { Product } from "../../models/Product.model";
 import SearchBar from "../../components/search/SearchBar";
 import Spinner from "../../components/spinner";
-import MobileCard from "../../components/products/MobileCard";
 import MainCard from "../../components/products/MainCard";
 
 export default function Category() {
