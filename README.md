@@ -113,16 +113,6 @@ npm test
         └── productServices.ts
 ```
 
-## Contributing
-
-[Shubhdeep Singh](https://github.com/Shubhdeeps)
-[Atanu Biswas](https://github.com/Atanu484)
-
-## Contact
-
-Shubhdeep Singh - shubhdeep.singh.1@eek.ee
-Atanu Biswas - atanu.biswas@eek.ee
-
 Project Link: [https://github.com/Shubhdeeps/asiangourmet](https://github.com/Shubhdeeps/asiangourmet)
 
 ## Acknowledgments
